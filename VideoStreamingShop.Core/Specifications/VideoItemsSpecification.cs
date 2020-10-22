@@ -6,7 +6,7 @@ using VideoStreamingShop.Core.Entities;
 
 namespace VideoStreamingShop.Core.Specifications
 {
-    internal class VideoItemsSpecification : Specification<Video>
+    public class VideoItemsSpecification : Specification<Video>
     {
         public VideoItemsSpecification(int page, int count)
         {

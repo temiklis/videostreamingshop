@@ -6,7 +6,7 @@ namespace VideoStreamingShop.Core.Entities
 {
     public abstract class Entity 
     {
-        protected int Id { get; set; }
+        public int Id { get; private set; }
         protected DateTime CreatedDate { get; set; }
     }
 }

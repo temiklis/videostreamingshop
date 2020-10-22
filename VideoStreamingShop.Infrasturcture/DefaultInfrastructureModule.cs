@@ -21,8 +21,31 @@ namespace VideoStreamingShop.Infrasturcture
         }
         protected override void Load(Autofac.ContainerBuilder builder)
         {
+            if(_isDevelopment)
+            {
+                LoadDevelopmentDependencies(builder);
+            }
+            else
+            {
+                LoadProductionDependencies(builder);
+            }
+
+            LoadCommonDependensies(builder);
+        }
+
+        private void LoadCommonDependensies(ContainerBuilder builder)
+        {
+        }
+
+        private void LoadProductionDependencies(ContainerBuilder builder)
+        {
+            
+        }
+
+        private void LoadDevelopmentDependencies(ContainerBuilder builder)
+        {
             builder
-                .RegisterType<EFRepository>()
+                .RegisterType<MockDataRepository>()
                 .As<IRepository>()
                 .InstancePerLifetimeScope();
             builder

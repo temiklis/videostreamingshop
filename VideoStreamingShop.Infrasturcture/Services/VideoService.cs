@@ -3,11 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using VideoStreamingShop.Core.DTOs;
 using VideoStreamingShop.Core.Entities;
 using VideoStreamingShop.Core.Interfaces;
 using VideoStreamingShop.Core.Specifications;
 
-namespace VideoStreamingShop.Core.Services
+namespace VideoStreamingShop.Infrasturcture.Services
 {
     internal class VideoService : IVideoService
     {
@@ -16,11 +17,22 @@ namespace VideoStreamingShop.Core.Services
         {
             _repository = repository;
         }
-        public async Task<List<Video>> GetAllVideo(int page, int count)
+        public async Task<List<VideoDTO>> GetAllVideo(int page, int count)
         {
             var specification = new VideoItemsSpecification(page, count);
             var videos = await _repository.GetListAsync(specification);
-            return videos;
+
+            var videoDtos = videos.ConvertAll<VideoDTO>(video =>
+            {
+                return new VideoDTO()
+                {
+                    Name = video.Name,
+                    Price = video.Price,
+                    Description = video.Description,
+                    AgeRate = video.AgeRate
+                };
+            });
+            return videoDtos;
         }
     }
 }
