@@ -1,0 +1,9 @@
+﻿@model VideoStreamingShop.MVC.ViewModels.UploadFileViewModel
+<form asp-action="UploadFile" enctype="multipart/form-data">
+
+    <input asp-for="ImageCaption" />
+    <input asp-for="ImageDescription" />
+    <input asp-for="Image" />
+
+    <input type="submit" />
+</form>

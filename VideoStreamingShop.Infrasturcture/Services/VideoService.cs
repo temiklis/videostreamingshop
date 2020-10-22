@@ -29,7 +29,7 @@ namespace VideoStreamingShop.Infrasturcture.Services
                     Name = video.Name,
                     Price = video.Price,
                     Description = video.Description,
-                    AgeRate = video.AgeRate
+                    AgeRate = video.AgeRate.ToString()
                 };
             });
             return videoDtos;

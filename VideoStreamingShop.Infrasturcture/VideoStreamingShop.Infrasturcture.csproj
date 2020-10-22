@@ -14,4 +14,8 @@
     <ProjectReference Include="..\VideoStreamingShop.Core\VideoStreamingShop.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
+
 </Project>

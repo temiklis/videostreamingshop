@@ -9,9 +9,9 @@ namespace VideoStreamingShop.Core.Entities
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
-        public string AgeRate { get; set; }
+        public AgeRating AgeRate { get; set; }
         public Video() { }
-        public Video(string name, string description, decimal price, string ageRate)
+        public Video(string name, string description, decimal price, AgeRating ageRate)
         {
             this.Name = name;
             this.Description = description;

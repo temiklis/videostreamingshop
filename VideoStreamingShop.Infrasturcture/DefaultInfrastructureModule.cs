@@ -52,6 +52,14 @@ namespace VideoStreamingShop.Infrasturcture
                 .RegisterType<VideoService>()
                 .As<IVideoService>()
                 .InstancePerLifetimeScope();
+            builder
+                .RegisterType<DefaultVideoFileValidator>()
+                .As<IVideoFileValidator>()
+                .InstancePerLifetimeScope();
+            builder
+                .RegisterType<LocalVideoStorage>()
+                .As<IVideoFileStorage>()
+                .InstancePerLifetimeScope();
         }
     }
 }
