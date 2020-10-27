@@ -4,7 +4,7 @@ using System.Text;
 
 namespace VideoStreamingShop.Core.Entities
 {
-    public class VideoFile
+    public class VideoFile : Entity
     {
         public string Name { get; set; }
         public string Version { get; set; }

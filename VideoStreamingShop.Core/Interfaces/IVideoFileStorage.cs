@@ -5,7 +5,7 @@ namespace VideoStreamingShop.Core.Interfaces
 {
     public interface IVideoFileStorage
     {
-        Task<FileStream> DownloadVideo(string videoId);
-        Task<bool> UploadVideo(byte[] data);
+        Task<byte[]> DownloadVideo(string videoId);
+        Task<string> UploadVideo(byte[] data);
     }
 }

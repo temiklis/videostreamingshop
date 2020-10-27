@@ -10,6 +10,7 @@ namespace VideoStreamingShop.Core.Entities
         public string Description { get; set; }
         public decimal Price { get; set; }
         public AgeRating AgeRate { get; set; }
+        public VideoFile LinkedFile { get; set; }
         public Video() { }
         public Video(string name, string description, decimal price, AgeRating ageRate)
         {
