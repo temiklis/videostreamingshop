@@ -1,9 +1,14 @@
 ﻿using Autofac;
+using Autofac.Core;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using VideoStreamingShop.Core.Interfaces;
+using VideoStreamingShop.Core.Usecases;
+using VideoStreamingShop.Core.Usecases.Storage;
+using VideoStreamingShop.Core.Usecases.Videocases;
 using VideoStreamingShop.Infrasturcture.Data;
 using VideoStreamingShop.Infrasturcture.Services;
 using Module = Autofac.Module;
@@ -55,7 +60,19 @@ namespace VideoStreamingShop.Infrasturcture
             builder
                 .RegisterType<LocalVideoStorage>()
                 .As<IVideoFileStorage>()
+                .WithParameter(
+                 (p, c) => p.ParameterType == typeof(string) && p.Name == "path",
+                 (p, c) => "AppFolder"
+                )
                 .InstancePerLifetimeScope();
+            builder.RegisterType<DownloadVideoResponseMessageValidator>()
+                .As<IValidator<DownloadVideoRequestMessage>>()
+                .InstancePerLifetimeScope();
+            builder.RegisterType<UploadVideoRequestMessageValidator>()
+                .As<IValidator<UploadVideoRequestMessage>>()
+                .InstancePerLifetimeScope();
+            builder.RegisterType<CreateVideoRequestMessageValidator>()
+                .As<IValidator<CreateVideoRequestMessage>>();        
         }
     }
 }

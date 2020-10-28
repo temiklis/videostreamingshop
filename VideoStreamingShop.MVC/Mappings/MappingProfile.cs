@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using VideoStreamingShop.Core.DTOs;
 using VideoStreamingShop.MVC.ViewModels;
+using VideoStreamingShop.MVC.ViewModels.Video;
 
 namespace VideoStreamingShop.MVC.Mappings
 {

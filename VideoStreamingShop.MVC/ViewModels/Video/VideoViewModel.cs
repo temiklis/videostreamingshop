@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace VideoStreamingShop.MVC.ViewModels
+namespace VideoStreamingShop.MVC.ViewModels.Video
 {
     public class VideoViewModel
     {

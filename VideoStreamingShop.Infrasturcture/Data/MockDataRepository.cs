@@ -16,6 +16,7 @@ namespace VideoStreamingShop.Infrasturcture.Data
         private readonly List<Entity> entities = new List<Entity>() {
             new Video()
             {
+                Id = 1,
                 Name = "Тесла",
                 Description = @"История одного из самых влиятельных физиков-изобретателей ХХ века Николы Теслы.
                                 Иммигрант из Сербии, переехав в Америку, вступает в неравное соперничество со своим великим работодателем Томасом Эдисоном.
@@ -86,7 +87,7 @@ namespace VideoStreamingShop.Infrasturcture.Data
 
         public Task UpdateAsync<T>(T entity) where T : Entity
         {
-            throw new NotImplementedException();
+            return Task.FromResult(default(T));
         }
     }
 }

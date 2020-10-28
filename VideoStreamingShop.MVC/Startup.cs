@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Autofac;
 using AutoMapper;
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,6 +12,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using VideoStreamingShop.Core.Usecases;
+using VideoStreamingShop.Core.Usecases.Storage;
+using VideoStreamingShop.Core.Usecases.Videocases;
 using VideoStreamingShop.Infrasturcture;
 
 namespace VideoStreamingShop.MVC
@@ -30,9 +34,12 @@ namespace VideoStreamingShop.MVC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddFluentValidation();
             services.AddMediatR(typeof(Startup));
             services.AddAutoMapper(typeof(Startup));
+            services.AddTransient<UploadVideoIteractor>();
+            services.AddTransient<CreateVideoIterator>();
         }
 
         public void ConfigureContainer(ContainerBuilder builder)

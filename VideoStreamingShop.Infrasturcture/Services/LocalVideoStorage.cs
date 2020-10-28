@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FluentValidation.Validators;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -9,14 +10,41 @@ namespace VideoStreamingShop.Infrasturcture.Services
 {
     internal class LocalVideoStorage : IVideoFileStorage
     {
-        public Task<byte[]> DownloadVideo(string videoId)
+        private string folderPath; 
+        public LocalVideoStorage(string path)
         {
-            throw new NotImplementedException();
+            folderPath = path;
+        }
+        public Task<byte[]> DownloadVideo(string videoUri)
+        {
+            byte[] fileData = null;
+
+            if (File.Exists(videoUri))
+            using (var stream = new FileStream(videoUri, FileMode.Open))
+            {
+                using(BinaryReader binaryReader = new BinaryReader(stream))
+                {
+                    fileData = binaryReader.ReadBytes((int)stream.Length);
+                }
+            }
+
+            return Task.FromResult(fileData);
         }
 
-        public Task<string> UploadVideo(byte[] data)
+        public async Task<string> UploadVideo(byte[] data)
         {
-            throw new NotImplementedException();
+            var pathToFile = $@"{folderPath}\{Guid.NewGuid()}";
+
+            if (!Directory.Exists(folderPath))
+                Directory.CreateDirectory(folderPath);
+
+            using (var stream = new FileStream(pathToFile, FileMode.OpenOrCreate))
+            {
+                stream.Seek(0, SeekOrigin.End);
+                await stream.WriteAsync(data, 0, data.Length);
+            }
+
+            return pathToFile;
         }
     }
 }

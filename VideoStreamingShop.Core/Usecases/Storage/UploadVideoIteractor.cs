@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using VideoStreamingShop.Core.Entities;
 using VideoStreamingShop.Core.Interfaces;
 
-namespace VideoStreamingShop.Core.Usecases
+namespace VideoStreamingShop.Core.Usecases.Storage
 {
     public class UploadVideoIteractor : IRequestHandler<UploadVideoRequestMessage, UploadVideoResponseMessage>
     {

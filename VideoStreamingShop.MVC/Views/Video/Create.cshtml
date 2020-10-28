@@ -1,0 +1,41 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model VideoStreamingShop.MVC.ViewModels.Video.CreateVideoViewModel
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+<form asp-action="Create" asp-controller="Video" method="post" enctype="multipart/form-data">
+    <div class="row justify-content-center">
+        <div class="col-6" style="background-color:aquamarine">
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AgeRating"></label>
+                <select asp-for="AgeRating" asp-items="Html.GetEnumSelectList<VideoStreamingShop.Core.Entities.AgeRating>()" class="form-control">
+                    <option selected="selected" value="">Please select</option>
+                </select>
+                <span asp-validation-for="AgeRating"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="File" class="form-control-file" />
+            </div>
+            <input class="btn btn-success" type="submit" value="Create" />
+        </div>
+    </div>
+</form>
