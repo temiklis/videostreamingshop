@@ -6,10 +6,11 @@
 @model VideoStreamingShop.MVC.ViewModels.Video.CreateVideoViewModel
 
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-
+<link rel="stylesheet" href="~/css/validation.css" />
+<script src="~/js/validation.js"></script>
 <form asp-action="Create" asp-controller="Video" method="post" enctype="multipart/form-data">
     <div class="row justify-content-center">
-        <div class="col-6" style="background-color:aquamarine">
+        <div class="col-6" style="background-color:aquamarine; border-radius:10px; box-shadow:10px 5px 5px black; padding-top:10px; padding-bottom:10px">
             <div class="form-group">
                 <label asp-for="Name"></label>
                 <input asp-for="Name" class="form-control" />

@@ -39,7 +39,7 @@ namespace VideoStreamingShop.MVC
             services.AddMediatR(typeof(Startup));
             services.AddAutoMapper(typeof(Startup));
             services.AddTransient<UploadVideoIteractor>();
-            services.AddTransient<CreateVideoIterator>();
+            services.AddTransient<CreateVideoIteractor>();
         }
 
         public void ConfigureContainer(ContainerBuilder builder)

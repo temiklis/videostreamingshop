@@ -13,7 +13,7 @@ namespace VideoStreamingShop.Infrasturcture.Data
 {
     public class MockDataRepository : IRepository
     {
-        private readonly List<Entity> entities = new List<Entity>() {
+        private static readonly List<Entity> entities = new List<Entity>() {
             new Video()
             {
                 Id = 1,

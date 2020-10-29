@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using VideoStreamingShop.Core.Entities;
 using VideoStreamingShop.Core.Interfaces;
 using VideoStreamingShop.Core.Usecases;
 using VideoStreamingShop.Core.Usecases.Storage;
@@ -22,10 +23,10 @@ namespace VideoStreamingShop.MVC.Controllers
         private readonly IVideoService _videoService;
         private readonly IMapper _mapper;
         private readonly UploadVideoIteractor _uploadVideoIteractor;
-        private readonly CreateVideoIterator _createVideoIterator;
+        private readonly CreateVideoIteractor _createVideoIterator;
 
-        //Need to use mediatR;
-        public VideoController(IVideoService videoService, IMediator mediator, IMapper mapper, UploadVideoIteractor iteractor, CreateVideoIterator createVideoIterator )
+        //Need to use mediatR for all methods, bacause we have large constructor and unnessary dependecies. 
+        public VideoController(IVideoService videoService, IMediator mediator, IMapper mapper, UploadVideoIteractor iteractor, CreateVideoIteractor createVideoIterator )
         {
             _mediator = mediator;
             _videoService = videoService;
@@ -46,6 +47,12 @@ namespace VideoStreamingShop.MVC.Controllers
             return View(paginatedViewModel);
         }
 
+        [Route("Video/{id}")]
+        public IActionResult Detail (int id)
+        {
+            return View();
+        }
+
         [HttpGet]
         public IActionResult Create()
         {
@@ -55,6 +62,11 @@ namespace VideoStreamingShop.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateVideoViewModel viewModel)
         {
+            if(!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
             var request = new CreateVideoRequestMessage()
             {
                 Name = viewModel.Name,
@@ -66,7 +78,7 @@ namespace VideoStreamingShop.MVC.Controllers
             var response = await _createVideoIterator.Handle(request, CancellationToken.None);
 
             if (response.VideoId != null)
-                return Ok(response.VideoId);
+                return RedirectToAction("Get", response.VideoId);
 
             return BadRequest();
         }

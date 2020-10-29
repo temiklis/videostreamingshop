@@ -11,13 +11,13 @@ using VideoStreamingShop.Core.Interfaces;
 
 namespace VideoStreamingShop.Core.Usecases.Videocases
 {
-    public class CreateVideoIterator : IRequestHandler<CreateVideoRequestMessage, CreateVideoResponseMessage>
+    public class CreateVideoIteractor : IRequestHandler<CreateVideoRequestMessage, CreateVideoResponseMessage>
     {
         //need to add automapper here
         private readonly IRepository _repository;
         private readonly IVideoFileStorage _videoFileStorage;
         private readonly IValidator<CreateVideoRequestMessage> _validator;
-        public CreateVideoIterator(IRepository repository, IValidator<CreateVideoRequestMessage> validator, IVideoFileStorage videoFileStorage)
+        public CreateVideoIteractor(IRepository repository, IValidator<CreateVideoRequestMessage> validator, IVideoFileStorage videoFileStorage)
         {
             _validator = validator;
             _repository = repository;
@@ -31,7 +31,7 @@ namespace VideoStreamingShop.Core.Usecases.Videocases
 
 
             VideoFile videoFile = new VideoFile();
-            if(request.FileData != null || request.FileData.Length > 0)
+            if(request.FileData != null && request.FileData.Length == 0)
             {
                 var uri = await _videoFileStorage.UploadVideo(request.FileData);
                 videoFile = new VideoFile()
