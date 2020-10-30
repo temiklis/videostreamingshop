@@ -18,9 +18,27 @@ a {
   border-color: #1861ac;
 }
 
+.navbar-custom {
+    background-color: #EF5252;
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+    color: white;
+}
+
+.navbar-custom .navbar-nav .nav-link {
+    color: white;
+}
+
+.navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+    color: #ffffff;
+}
+
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
   color: #fff;
-  background-color: #1b6ec2;
+  background-color: #EF5252;
   border-color: #1861ac;
 }
 
@@ -61,6 +79,7 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+  background-color:black;
 }
 .footer {
   position: absolute;
