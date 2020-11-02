@@ -23,24 +23,37 @@ namespace VideoStreamingShop.Infrasturcture.Data
                                 Переживая неудачи, разочарования и гонения, Тесла упорно прокладывает свой особенный путь в науке.
                                 Никола Тесла впервые сталкивается с электричеством еще в детстве, когда гладит кошку.",
                 Price = 13.22m,
-                AgeRate = AgeRating.PG  
+                AgeRate = AgeRating.PG,
+                LinkedFile = new VideoFile()
+                {
+                    Uri = "https://www.graycell.ru/picture/big/soyuzniki.jpg"
+                }
             },
             new Video()
             {
+                Id = 2,
                 Name = "Элис",
                 Description = @"После аварийной посадки космический пилот и его собака оказываются на неизведанной планете. 
                                 Чтобы спасти себя и друга, герою приходится откинуть все привычные представления о гравитации, климате и времени. 
                                 Независимый фантастический триллер режиссеров-дебютантов Джо Блэнда и Гранта Мартина, также исполнившего главную роль.",
                 Price = 9.99m,
-                AgeRate = AgeRating.PG13
+                AgeRate = AgeRating.PG13,
+                LinkedFile = new VideoFile()
+                {
+                    Uri = "https://images.planvine.com/thumbor/AVEVGA71UGoqzGfmvXdG5l5-gBA=/500x500/smart/s3.amazonaws.com/com.planvine.v4.image/27371ec27cb14eba9124bc3ee1b5a185.jpg"
+                }
             },
             new Video()
             {
+                Id = 3,
                 Name = "Форпост",
                 Description = @"История неравного противостояния американских военных и боевиков движения Талибан, 
                                 которые в несколько раз превосходили по численности силы США. Динамичная военная драма, основанная на реальных событиях.",
                 Price = 9.99m,
-                AgeRate = AgeRating.NC17
+                AgeRate = AgeRating.NC17,
+                LinkedFile = new VideoFile(){
+                    Uri = "https://i1.sndcdn.com/artworks-000128931196-kasqrp-t500x500.jpg"
+                }
             }
         };
 

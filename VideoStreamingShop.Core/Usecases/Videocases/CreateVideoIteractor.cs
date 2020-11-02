@@ -48,7 +48,10 @@ namespace VideoStreamingShop.Core.Usecases.Videocases
                 Description = request.Description,
                 Price = request.Price,
                 AgeRate = request.AgeRate,
-                LinkedFile = videoFile
+                LinkedFile = videoFile,
+                Images = new List<VideoImage>() { 
+
+                }
             };
 
             var vd = await _repository.AddAsync<Video>(video);

@@ -9,38 +9,32 @@
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="~/css/spoiler.css" />
 
-<div style="display:flex; flex-flow: row wrap; justify-content:space-around">
-    <div>1</div>
-    <div>2</div>
-    <div>3</div>
-    <div>4</div>
-</div>
+<style>
+    .text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /* number of lines to show */
+        -webkit-box-orient: vertical;
+    }
 
-<div>
-    <div class="container">
-        <div class="row h-25" style="text-align:justify; max-height:300px">
-            @foreach (var video in Model.Data)
-            {
-                <div class="col-sm-4">
-                    <div>
-                        <h1>@video.Name</h1>
-                    </div>
-                    <div class="img-container d-flex justify-content-center">
-                        <img src="https://pp.userapi.com/c841430/v841430971/497cb/ncMEILjxvVY.jpg?ava=1" class="img-fluid"/>
-                        <span class="top-left">@video.AgeRate</span>
-                    </div>
-                    <div>
-                        @video.Price
-                    </div>
-                    <div class="box more">
-                        <div>
-                            <span>Read More</span>
-                            <p>@video.Description</p>
-                        </div>
-                        <span>Read More</span>
-                    </div>
+    div.row > div {
+        padding-bottom: 10px;
+    }
+</style>
+<div class="row" style="padding-top:20px;">
+    @foreach (var video in Model.Data)
+    {
+        <div class="col-md-4">
+            <div class="card border border-dark">
+                <img class="card-img-top" src="@video.ImageUri" />
+                <h4 style="position:absolute; color:azure; left:10px">@video.AgeRate</h4>
+                <div class="card-body">
+                    <h6 class="card-title">@video.Name</h6>
+                    <p class="card-text text">@video.Description</p>
+                    <a asp-action="Detail" asp-controller="Video" asp-route-id="@video.Id" asp- class="btn btn-danger">Watch now</a>
                 </div>
-            }
+            </div>
         </div>
-        </div> 
+    }
 </div>

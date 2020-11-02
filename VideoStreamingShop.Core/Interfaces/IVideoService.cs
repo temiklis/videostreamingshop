@@ -10,5 +10,6 @@ namespace VideoStreamingShop.Core.Interfaces
     public interface IVideoService
     {
         Task<List<VideoDTO>> GetAllVideo(int page, int count);
+        Task<VideoDTO> GetVideoById(int id);
     }
 }

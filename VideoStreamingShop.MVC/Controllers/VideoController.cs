@@ -25,7 +25,7 @@ namespace VideoStreamingShop.MVC.Controllers
         private readonly UploadVideoIteractor _uploadVideoIteractor;
         private readonly CreateVideoIteractor _createVideoIterator;
 
-        //Need to use mediatR for all methods, bacause we have large constructor and unnessary dependecies. 
+#warning Need to use mediatR for all methods, bacause we have large constructor and unnessary dependecies.(or use some patterns) 
         public VideoController(IVideoService videoService, IMediator mediator, IMapper mapper, UploadVideoIteractor iteractor, CreateVideoIteractor createVideoIterator )
         {
             _mediator = mediator;
@@ -48,9 +48,11 @@ namespace VideoStreamingShop.MVC.Controllers
         }
 
         [Route("Video/{id}")]
-        public IActionResult Detail (int id)
+        public async Task<IActionResult> Detail (int id)
         {
-            return View();
+            var video = await _videoService.GetVideoById(id);
+            var viewModel = _mapper.Map<VideoViewModel>(video);
+            return View(viewModel);
         }
 
         [HttpGet]
@@ -72,8 +74,18 @@ namespace VideoStreamingShop.MVC.Controllers
                 Name = viewModel.Name,
                 Description = viewModel.Description,
                 AgeRate = viewModel.AgeRating,
-                Price = viewModel.Price
+                Price = viewModel.Price,
             };
+
+            if(viewModel.File != null)
+            {
+                using(var ms = new MemoryStream())
+                {
+                    viewModel.File.CopyTo(ms);
+                    var fileBytes = ms.ToArray();
+                    request.FileData = fileBytes;
+                }
+            }    
 
             var response = await _createVideoIterator.Handle(request, CancellationToken.None);
 

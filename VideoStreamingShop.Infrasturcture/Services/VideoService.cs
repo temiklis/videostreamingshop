@@ -26,13 +26,31 @@ namespace VideoStreamingShop.Infrasturcture.Services
             {
                 return new VideoDTO()
                 {
+                    Id = video.Id,
                     Name = video.Name,
                     Price = video.Price,
                     Description = video.Description,
-                    AgeRate = video.AgeRate.ToString()
+                    AgeRate = video.AgeRate.ToString(),
+                    ImageUri = video.LinkedFile?.Uri
                 };
             });
             return videoDtos;
+        }
+
+        public async Task<VideoDTO> GetVideoById(int id)
+        {
+            var video = await _repository.GetByIdAsync<Video>(id);
+            var videoDTo = new VideoDTO()
+            {
+                Id = video.Id,
+                Name = video.Name,
+                Price = video.Price,
+                Description = video.Description,
+                AgeRate = video.AgeRate.ToString(),
+                ImageUri = video.LinkedFile?.Uri
+            };
+
+            return videoDTo;
         }
     }
 }

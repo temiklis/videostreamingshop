@@ -3,27 +3,25 @@
 *@
 @{
 }
+@model VideoStreamingShop.MVC.ViewModels.Video.VideoViewModel
 
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 <div>
     <div style="display:flex; padding:10px 10px">
-
         <div style="display:inline">
-            <img src="https://img.joj.sk/r500x500/9af823089038a0b52bfd0dc750fa75a9" style="max-width:300px; max-height:300px; border-radius:5px" />
+            <img src="@Model.ImageUri" style="max-width:300px; max-height:300px; border-radius:5px" />
         </div>
         <div style="display:inline; margin-left:30px">
            <div>
-               <h2 style="color:white">Enola Holmes</h2>
+               <h2 style="color:white">@Model.Name</h2>
                <div>
                    <div style="font-size: 1.5rem; font-weight: 700; color:white">
-                       $9.95
+                       $@Model.Price
                    </div>
                </div>
                <p style="text-align:justify; color:white">
-                   While searching for her missing mother, intrepid teen Enola 
-                   Holmes uses her sleuthing skills to outsmart big brother 
-                   Sherlock and help a runaway lord.
-               </p>
+                   @Model.Description
+               </p> 
                <div>
                    <a class="btn btn-success">Buy</a>
                    <a class="btn btn-outline-secondary">Download</a>
