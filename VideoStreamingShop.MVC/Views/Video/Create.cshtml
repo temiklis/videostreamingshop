@@ -7,40 +7,108 @@
 
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="~/css/validation.css" />
+<link rel="stylesheet" href="~/css/test.css" />
+<link rel="stylesheet" href="~/css/form.css" />
+<link rel="stylesheet" href="~/css/DragAndDropComponent.css" />
+<link rel="stylesheet" href="~/lib/dropzone/css/dropzone.min.css" />
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/js/validation.js"></script>
-<form asp-action="Create" asp-controller="Video" method="post" enctype="multipart/form-data">
-    <div class="row justify-content-center">
-        <div class="col-6" style="background-color:aquamarine; border-radius:10px; box-shadow:10px 5px 5px black; padding-top:10px; padding-bottom:10px">
-            <div class="form-group">
-                <label asp-for="Name"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Price"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AgeRating"></label>
-                <select asp-for="AgeRating" asp-items="Html.GetEnumSelectList<VideoStreamingShop.Core.Entities.AgeRating>()" class="form-control">
-                    <option selected="selected" value="">Please select</option>
-                </select>
-                <span asp-validation-for="AgeRating"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description"></label>
-                <textarea asp-for="Description" class="form-control"></textarea>
-                <span asp-validation-for="Description"></span>
-            </div>
-            <div class="form-group">
-                <input asp-for="File" class="form-control-file" />
-            </div>
-            <input class="btn btn-success" type="submit" value="Create" on />
+<script src="~/lib/dropzone/js/dropzone.min.js"></script>
+
+<div class="tab-container" >
+    <div class="nav flex-column nav-pills tab-nav" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <a class="nav-link active" id="v-pills-video-create-tab" data-toggle="pill" href="#v-pills-video-create" role="tab" aria-controls="v-pills-video-create" aria-selected="true">Info</a>
+        <a class="nav-link" id="v-pills-video-images-tab" data-toggle="pill" href="#v-pills-video-images" role="tab" aria-controls="v-pills-vide-images" aria-selected="false">Add Images</a>
+    </div>
+    <div class="tab-content tab-body " id="v-pills-tabContent">
+        <div class="tab-pane fade show active" id="v-pills-video-create" role="tabpanel" aria-labelledby="v-pills-video-create-tab">
+            <form method="post" asp-action="Create" asp-controller="Video">
+                <div class="form-group">
+                    <label asp-for="Name"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Price"></label>
+                    <input asp-for="Price" type="number" class="form-control" />
+                    <span asp-validation-for="Price"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="AgeRating"></label>
+                    <select asp-for="AgeRating" asp-items="Html.GetEnumSelectList<VideoStreamingShop.Core.Entities.AgeRating>()" class="form-control">
+                        <option selected="selected" value="">Please select</option>
+                    </select>
+                    <span asp-validation-for="AgeRating"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description"></label>
+                    <textarea asp-for="Description" class="form-control"></textarea>
+                    <span asp-validation-for="Description"></span>
+                </div>
+                <input id="createVideoBtn" class="btn btn-success" type="submit" value="Create" />
+            </form>
+        </div>
+        <div class="tab-pane fade" id="v-pills-video-images" role="tabpanel" aria-labelledby="v-pills-video-images-tab"> 
+            <form id="dropArea" method="post" class="dropzone" asp-action="UploadImagesForVideo" asp-controller="FileStorage">
+                <input type="hidden" id="videoId"/>
+                <div class="fallback">
+                    <input id="uploadfile" name="file" type="file" multiple />
+                </div>
+                <div id="loadedImages">
+                </div>
+                <div>
+                    <input class="btn btn-danger" type="submit" id="uploadfilebtn" />
+                </div>
+            </form>
         </div>
     </div>
-</form>
+</div>
 
 <script>
+    Dropzone.options.dropArea = {
+        maxFileSize: 2,
+        uploadMultiple: true,
+        maxFiles:5,
+        accept: function (file, done) {
+            console.log(done);
+        },
 
+        previewTemplate: document.querySelector('#dropArea').innerHTML,
+
+        success: function (data) {
+            console.log(data);
+        },
+        addedfile: function (file) {
+            $("#dropArea").submit(function (e) {
+                e.preventDefault();
+                var formAction = $(this).attr("action");
+                var fdata = new FormData();
+                var files = file;
+                fdata.append(file.name, file);
+                $.ajax({
+                    method: "post",
+                    url: formAction + "?videoId=1",
+                    data: fdata,
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                }).done(function (result) {
+                    if (result.status == "success") {
+                        for (var i = 0; i < data.paths.length; i++) {
+                            $("#loadedImages").append("<img src='" + data.paths[i] + "'/>")
+                        }
+                    }
+                    else {
+                        console.log("Failed to load file")
+                    }
+                });
+            })
+        },
+        thumbnail: function (file, dataUrl) {
+            // Display the image in your file.previewElement
+        },
+        uploadprogress: function (file, progress, bytesSent) {
+            // Display the progress
+        }
+    };
 </script>

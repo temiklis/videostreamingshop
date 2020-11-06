@@ -1,0 +1,52 @@
+﻿$pink: #EF5252;
+$dark: #090908;
+$darkgrey: #323232;
+$white: #ffffff;
+
+h1 {
+    color:$white
+}
+
+h2{
+    color:white
+}
+
+.tab-container{
+    display:flex;
+    padding:20px;
+    min-width:300px;
+}
+
+.tab-nav{
+    width:15%;
+    background-color:$pink
+}
+
+.tab-body{
+    width:85%;
+    background-color:$white;
+    padding:10px 10px;
+}
+
+.nav-link{
+    color:$white;
+}
+
+.nav-item.active .nav-link,
+.nav-item:hover .nav-link {
+    color: $white;
+}
+
+.nav-pills .nav-link:hover, .nav-pills .show > .nav-link {
+    background-color: $dark;
+    color: $white;
+    border-radius: 0;
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    background-color: $darkgrey;
+    border-radius: 0;
+}
+
+
+
+

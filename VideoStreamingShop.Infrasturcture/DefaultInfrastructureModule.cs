@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
+using VideoStreamingShop.Core.Infrascturucre;
 using VideoStreamingShop.Core.Interfaces;
 using VideoStreamingShop.Core.Usecases;
 using VideoStreamingShop.Core.Usecases.Storage;
@@ -49,13 +50,57 @@ namespace VideoStreamingShop.Infrasturcture
 
         private void LoadDevelopmentDependencies(ContainerBuilder builder)
         {
+
             builder
-                .RegisterType<MockDataRepository>()
-                .As<IRepository>()
+                .RegisterType<MimeShiffing>()
+                .As<IMimeShiffing>()
                 .InstancePerLifetimeScope();
+
+            builder
+                .RegisterType<ImageFileExtension>()
+                .Keyed<IFileExtension>(FileType.Image)
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<VideoFileExtension>()
+                .Keyed<IFileExtension>(FileType.Video)
+                .InstancePerLifetimeScope();
+
+            LoadStoragies(builder);
+
             builder
                 .RegisterType<VideoService>()
                 .As<IVideoService>()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<DownloadVideoResponseMessageValidator>()
+                .As<IValidator<DownloadVideoRequestMessage>>()
+                .InstancePerLifetimeScope();
+            builder
+                .RegisterType<UploadVideoRequestMessageValidator>()
+                .As<IValidator<UploadVideoRequestMessage>>()
+                .InstancePerLifetimeScope();
+            builder
+                .RegisterType<CreateVideoRequestMessageValidator>()
+                .As<IValidator<CreateVideoRequestMessage>>()
+                .InstancePerLifetimeScope();
+            builder.RegisterType<UploadImagesForVideoValidator>()
+                .As<IValidator<UploadImagesForVideoRequestMessage>>()
+                .InstancePerLifetimeScope();
+        }
+
+        private static void LoadStoragies(ContainerBuilder builder)
+        {
+            builder.
+                RegisterType<LocalImageStorage>()
+                .As<IImageStorage>()
+                .WithParameter(
+                    (p, c) => p.ParameterType == typeof(string) && p.Name == "storagePath",
+                    (p, c) => "AppFolder/Images"
+                )
+                .InstancePerLifetimeScope();
+            builder
+                .RegisterType<MockDataRepository>()
+                .As<IRepository>()
                 .InstancePerLifetimeScope();
             builder
                 .RegisterType<LocalVideoStorage>()
@@ -65,14 +110,6 @@ namespace VideoStreamingShop.Infrasturcture
                  (p, c) => "AppFolder"
                 )
                 .InstancePerLifetimeScope();
-            builder.RegisterType<DownloadVideoResponseMessageValidator>()
-                .As<IValidator<DownloadVideoRequestMessage>>()
-                .InstancePerLifetimeScope();
-            builder.RegisterType<UploadVideoRequestMessageValidator>()
-                .As<IValidator<UploadVideoRequestMessage>>()
-                .InstancePerLifetimeScope();
-            builder.RegisterType<CreateVideoRequestMessageValidator>()
-                .As<IValidator<CreateVideoRequestMessage>>();        
         }
     }
 }

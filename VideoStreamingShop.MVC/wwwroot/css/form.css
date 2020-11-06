@@ -1,0 +1,35 @@
+h1 {
+  color: #ffffff; }
+
+h2 {
+  color: white; }
+
+.tab-container {
+  display: flex;
+  padding: 20px;
+  min-width: 300px; }
+
+.tab-nav {
+  width: 15%;
+  background-color: #EF5252; }
+
+.tab-body {
+  width: 85%;
+  background-color: #ffffff;
+  padding: 10px 10px; }
+
+.nav-link {
+  color: #ffffff; }
+
+.nav-item.active .nav-link,
+.nav-item:hover .nav-link {
+  color: #ffffff; }
+
+.nav-pills .nav-link:hover, .nav-pills .show > .nav-link {
+  background-color: #090908;
+  color: #ffffff;
+  border-radius: 0; }
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  background-color: #323232;
+  border-radius: 0; }

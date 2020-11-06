@@ -20,5 +20,13 @@ namespace VideoStreamingShop.Core.Entities
             this.Price = price;
             this.AgeRate = ageRate;
         }
+
+        public void RegisterImage(VideoImage image)
+        {
+            if (Images == null)
+                Images = new List<VideoImage>();
+
+            Images.Add(image);
+        }
     }
 }

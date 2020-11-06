@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using VideoStreamingShop.Core.Entities;
@@ -11,9 +12,9 @@ namespace VideoStreamingShop.MVC.ViewModels.Video
 {
     public class CreateVideoViewModel
     {
+        public int VideoId { get; set; }
         [Required]
-        [MinLength(20)]
-        [MaxLength(50)]
+        [MaxLength(100)]
         [DisplayName("Name")]
         public string Name { get; set; }
         [Required]
@@ -23,13 +24,13 @@ namespace VideoStreamingShop.MVC.ViewModels.Video
         [DisplayName("Description")]
         public string Description { get; set; }
         [Required]
-        [DataType(DataType.Currency)]
+        [Column(TypeName = "decimal(18, 2)")]
         [DisplayName("Price")]
-        public int Price { get; set; }
+        public decimal Price { get; set; }
         [Required]
         [DisplayName("Age Rating")]
         public AgeRating AgeRating { get; set; }
         [DisplayName("File")]
-        public IFormFile File { get; set; }
+        public List<IFormFile> File { get; set; }
     }
 }

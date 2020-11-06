@@ -1,7 +1,9 @@
 ﻿using Ardalis.Specification;
 using Moq;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,94 +15,133 @@ namespace VideoStreamingShop.Infrasturcture.Data
 {
     public class MockDataRepository : IRepository
     {
-        private static readonly List<Entity> entities = new List<Entity>() {
-            new Video()
-            {
-                Id = 1,
-                Name = "Тесла",
-                Description = @"История одного из самых влиятельных физиков-изобретателей ХХ века Николы Теслы.
-                                Иммигрант из Сербии, переехав в Америку, вступает в неравное соперничество со своим великим работодателем Томасом Эдисоном.
-                                Переживая неудачи, разочарования и гонения, Тесла упорно прокладывает свой особенный путь в науке.
-                                Никола Тесла впервые сталкивается с электричеством еще в детстве, когда гладит кошку.",
-                Price = 13.22m,
-                AgeRate = AgeRating.PG,
-                LinkedFile = new VideoFile()
-                {
-                    Uri = "https://www.graycell.ru/picture/big/soyuzniki.jpg"
-                }
-            },
-            new Video()
-            {
-                Id = 2,
-                Name = "Элис",
-                Description = @"После аварийной посадки космический пилот и его собака оказываются на неизведанной планете. 
-                                Чтобы спасти себя и друга, герою приходится откинуть все привычные представления о гравитации, климате и времени. 
-                                Независимый фантастический триллер режиссеров-дебютантов Джо Блэнда и Гранта Мартина, также исполнившего главную роль.",
-                Price = 9.99m,
-                AgeRate = AgeRating.PG13,
-                LinkedFile = new VideoFile()
-                {
-                    Uri = "https://images.planvine.com/thumbor/AVEVGA71UGoqzGfmvXdG5l5-gBA=/500x500/smart/s3.amazonaws.com/com.planvine.v4.image/27371ec27cb14eba9124bc3ee1b5a185.jpg"
-                }
-            },
-            new Video()
-            {
-                Id = 3,
-                Name = "Форпост",
-                Description = @"История неравного противостояния американских военных и боевиков движения Талибан, 
-                                которые в несколько раз превосходили по численности силы США. Динамичная военная драма, основанная на реальных событиях.",
-                Price = 9.99m,
-                AgeRate = AgeRating.NC17,
-                LinkedFile = new VideoFile(){
-                    Uri = "https://i1.sndcdn.com/artworks-000128931196-kasqrp-t500x500.jpg"
-                }
-            }
-        };
-
+        private string fileExtension = "txt";
+        private string folder = "repositoryFolder";
         public MockDataRepository()
         {
+            if (!Directory.Exists(folder))
+            {
+                Directory.CreateDirectory(folder);
+            }
         }
-        public Task<T> AddAsync<T>(T entity) where T : Entity
+        public async Task<T> AddAsync<T>(T entity) where T : Entity
         {
-            entities.Add(entity);
-            return Task.FromResult(entity);
+            entity.Id = AutoGenerate<T>();
+            using (FileStream stream = new FileStream($@"{folder}\{entity.Id}.{typeof(T).ToString()}.{fileExtension}", FileMode.Append))
+            {
+                using (StreamWriter writer = new StreamWriter(stream))
+                {
+                    var json = JsonConvert.SerializeObject(entity);
+                    await writer.WriteLineAsync(json);
+                }
+            }
+
+            return entity;
+        }
+
+        private int AutoGenerate<T>()
+        {
+            int id = 1;
+            var path = $@"{folder}";
+            var lastFilePath = Directory.EnumerateFiles(path, $"*.{typeof(T).ToString()}.{fileExtension}" ).LastOrDefault();
+            if (lastFilePath != null)
+            {
+                id = int.Parse(lastFilePath.Replace(folder+"\\", string.Empty).Split('.').First());
+                id += 1;
+            }
+
+            return id;
         }
 
         public Task DeleteAsync<T>(T entity) where T : Entity
         {
-            if (entities.Contains(entity))
-                entities.Remove(entity);
-
+            var path = $@"{folder}\{entity.Id}.{typeof(T).ToString()}.{fileExtension}";
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }    
             return Task.CompletedTask;
         }
 
-        public Task<T> GetByIdAsync<T>(int id) where T : Entity
+        public async Task<T> GetByIdAsync<T>(int id) where T : Entity
         {
-            T entity = entities
-                .Where(e => (e as Entity).Id == id)
-                .SingleOrDefault() 
-                as T;
-            return Task.FromResult(entity);
+            var path = $@"{folder}\{id}.{typeof(T).ToString()}.{fileExtension}";
+
+            if (!File.Exists(path))
+                return default(T);
+
+            using(FileStream stream = new FileStream(path, FileMode.Open))
+            {
+                using(StreamReader reader = new StreamReader(stream))
+                {
+                    var content = await reader.ReadToEndAsync();
+                    var ent = JsonConvert.DeserializeObject<T>(content);
+                    return ent;
+                }
+            }
         }
 
-        public Task<List<T>> GetListAsync<T>() where T : Entity
+        public async Task<List<T>> GetListAsync<T>() where T : Entity
         {
-            return Task.FromResult(entities.Cast<T>().ToList());
+            var results = new List<T>();
+            var files = Directory.GetFiles($"{folder}", $"*.{typeof(T).ToString()}.{fileExtension}");
+            foreach (var path in files)
+            {
+                using (StreamReader reader = new StreamReader(path))
+                {
+                    var content = await reader.ReadToEndAsync();
+                    var entity = JsonConvert.DeserializeObject<T>(content);
+                    results.Add(entity);
+                }
+            }
+
+            return results;
         }
 
-        public Task<List<T>> GetListAsync<T>(ISpecification<T> spec) where T : Entity
+        public async Task<List<T>> GetListAsync<T>(ISpecification<T> spec) where T : Entity
         {
-            return Task.FromResult(entities
+            var results = new List<T>();
+            var files = Directory
+                .EnumerateFiles($"{folder}", $"*.{typeof(T).ToString()}.{fileExtension}")
                 .Take((int)spec.Take)
                 .Skip((int)spec.Skip)
-                .Cast<T>()
-                .ToList()
-                );
+                .ToList();
+
+            foreach (var path in files)
+            {
+                using (StreamReader reader = new StreamReader(path))
+                {
+                    var content = await reader.ReadToEndAsync();
+                    var entity = JsonConvert.DeserializeObject<T>(content);
+                    results.Add(entity);
+                }
+            }
+
+            return results;
         }
 
-        public Task UpdateAsync<T>(T entity) where T : Entity
+        public async Task UpdateAsync<T>(T entity) where T : Entity
         {
-            return Task.FromResult(default(T));
+            var path = $"{entity.Id}.{typeof(T).ToString()}.{fileExtension}";
+            if (!File.Exists(path))
+                return;
+
+            using (FileStream stream = new FileStream(path, FileMode.Open))
+            {
+                StreamReader streamReader = new StreamReader(stream);
+                var content = await streamReader.ReadToEndAsync();
+                var ent = JsonConvert.DeserializeObject<T>(content);
+
+                var id = ent.Id;
+                ent = entity;
+                ent.Id = id;
+
+                using (StreamWriter streamWriter = new StreamWriter(stream))
+                {
+                    var json = JsonConvert.SerializeObject(ent);
+                    await streamWriter.WriteAsync(json);
+                }
+            }
         }
     }
 }

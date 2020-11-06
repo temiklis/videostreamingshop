@@ -1,0 +1,20 @@
+﻿$dropBackgroundColor : wheat;
+$white : #ffffff;
+$green: #4cff00;
+
+#dropArea{
+    background-color:$dropBackgroundColor;
+    border:black dashed 1px;
+    height:50px;
+    text-align:center;
+    align-items:center;
+    color: $white;
+    padding-top:12px;
+}
+
+.active-drop{
+    background: $green !important;
+    border:solid 2px blue !important;
+    opacity:.5;
+    color:black!important;
+}

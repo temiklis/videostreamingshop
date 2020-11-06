@@ -1,0 +1,14 @@
+#dropArea {
+  background-color: wheat;
+  border: black dashed 1px;
+  height: 50px;
+  text-align: center;
+  align-items: center;
+  color: #ffffff;
+  padding-top: 12px; }
+
+.active-drop {
+  background: #4cff00 !important;
+  border: solid 2px blue !important;
+  opacity: .5;
+  color: black !important; }

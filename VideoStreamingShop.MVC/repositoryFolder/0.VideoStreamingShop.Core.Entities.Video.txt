@@ -1,0 +1,1 @@
+{"Name":"Tesla","Description":"Visionary inventor Nikola Tesla fights an uphill battle to bring his revolutionary electrical system to fruition, then faces thornier challenges with his new system for worldwide wireless energy.","Price":9.99,"AgeRate":4,"Images":null,"LinkedFile":{"Name":null,"Version":null,"Uri":null,"Id":0},"Id":0}

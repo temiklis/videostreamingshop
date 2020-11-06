@@ -3,5 +3,5 @@
     errorClass: "is-invalid"
 
 };
-$.validator.setDefaults(settings);
+$.validator.setDefault(settings);
 $.validator.unobtrusive.options = settings;

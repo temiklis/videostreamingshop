@@ -48,10 +48,7 @@ namespace VideoStreamingShop.Core.Usecases.Videocases
                 Description = request.Description,
                 Price = request.Price,
                 AgeRate = request.AgeRate,
-                LinkedFile = videoFile,
-                Images = new List<VideoImage>() { 
-
-                }
+                LinkedFile = videoFile
             };
 
             var vd = await _repository.AddAsync<Video>(video);
@@ -75,7 +72,7 @@ namespace VideoStreamingShop.Core.Usecases.Videocases
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public int Price { get; set; }
+        public decimal Price { get; set; }
         public AgeRating AgeRate { get; set; }
         public byte[] FileData { get; set; }
     }

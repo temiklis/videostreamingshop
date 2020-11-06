@@ -1,6 +1,7 @@
 ﻿using Ardalis.Specification;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VideoStreamingShop.Core.DTOs;
@@ -31,7 +32,7 @@ namespace VideoStreamingShop.Infrasturcture.Services
                     Price = video.Price,
                     Description = video.Description,
                     AgeRate = video.AgeRate.ToString(),
-                    ImageUri = video.LinkedFile?.Uri
+                    ImageUri = video.Images?.FirstOrDefault()?.Uri
                 };
             });
             return videoDtos;
@@ -40,6 +41,9 @@ namespace VideoStreamingShop.Infrasturcture.Services
         public async Task<VideoDTO> GetVideoById(int id)
         {
             var video = await _repository.GetByIdAsync<Video>(id);
+            if (video == null)
+                return null;
+
             var videoDTo = new VideoDTO()
             {
                 Id = video.Id,
@@ -47,7 +51,7 @@ namespace VideoStreamingShop.Infrasturcture.Services
                 Price = video.Price,
                 Description = video.Description,
                 AgeRate = video.AgeRate.ToString(),
-                ImageUri = video.LinkedFile?.Uri
+                ImageUri = video.Images?.FirstOrDefault()?.Uri
             };
 
             return videoDTo;

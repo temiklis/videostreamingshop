@@ -74,23 +74,16 @@ namespace VideoStreamingShop.MVC.Controllers
                 Name = viewModel.Name,
                 Description = viewModel.Description,
                 AgeRate = viewModel.AgeRating,
-                Price = viewModel.Price,
-            };
-
-            if(viewModel.File != null)
-            {
-                using(var ms = new MemoryStream())
-                {
-                    viewModel.File.CopyTo(ms);
-                    var fileBytes = ms.ToArray();
-                    request.FileData = fileBytes;
-                }
-            }    
+                Price = viewModel.Price
+            }; 
 
             var response = await _createVideoIterator.Handle(request, CancellationToken.None);
 
             if (response.VideoId != null)
-                return RedirectToAction("Get", response.VideoId);
+            {
+                ViewData["videoId"] = response.VideoId.Value;
+                return View(viewModel);
+            }
 
             return BadRequest();
         }
