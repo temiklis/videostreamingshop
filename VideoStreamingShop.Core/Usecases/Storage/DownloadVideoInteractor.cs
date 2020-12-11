@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using VideoStreamingShop.Core.Entities;
 using VideoStreamingShop.Core.Interfaces;
+using VideoStreamingShop.Core.Interfaces.Storage;
 
 namespace VideoStreamingShop.Core.Usecases.Storage
 {

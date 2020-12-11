@@ -1,114 +1,243 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
 }
 @model VideoStreamingShop.MVC.ViewModels.Video.CreateVideoViewModel
 
-<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-<link rel="stylesheet" href="~/css/validation.css" />
-<link rel="stylesheet" href="~/css/test.css" />
-<link rel="stylesheet" href="~/css/form.css" />
-<link rel="stylesheet" href="~/css/DragAndDropComponent.css" />
-<link rel="stylesheet" href="~/lib/dropzone/css/dropzone.min.css" />
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/js/validation.js"></script>
-<script src="~/lib/dropzone/js/dropzone.min.js"></script>
+<link rel="stylesheet" href="~/css/gsdk-bootstrap-wizard.css" />
+<link href="https://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
 
-<div class="tab-container" >
-    <div class="nav flex-column nav-pills tab-nav" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-        <a class="nav-link active" id="v-pills-video-create-tab" data-toggle="pill" href="#v-pills-video-create" role="tab" aria-controls="v-pills-video-create" aria-selected="true">Info</a>
-        <a class="nav-link" id="v-pills-video-images-tab" data-toggle="pill" href="#v-pills-video-images" role="tab" aria-controls="v-pills-vide-images" aria-selected="false">Add Images</a>
-    </div>
-    <div class="tab-content tab-body " id="v-pills-tabContent">
-        <div class="tab-pane fade show active" id="v-pills-video-create" role="tabpanel" aria-labelledby="v-pills-video-create-tab">
-            <form method="post" asp-action="Create" asp-controller="Video">
-                <div class="form-group">
-                    <label asp-for="Name"></label>
-                    <input asp-for="Name" class="form-control" />
-                    <span asp-validation-for="Name"></span>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+
+                <div class="wizard-container">
+                    <div class="card wizard-card" data-color="red" id="wizzardProfile">
+                        <form action="" method="post">
+                            <div class="wizard-header">
+                                <h3>
+                                    <b>Create</b> new video<br />
+                                    <small>First step</small>
+                                </h3>
+                            </div>
+
+                            <div class="wizard-navigation">
+                                <ul>
+                                    <li><a href="#newvideo" data-toggle="tab">Create</a></li>
+                                    <li><a href="#images" data-toggle="tab">Add Images</a></li>
+                                    <li><a href="#video" data-toggle="tab">Load Video</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="tab-content">
+                                <div class="tab-pane" id="newvideo">
+                                    <div class="row">
+                                        <h3 class="info-text col-md-12">Let's start with the basic information</h3>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label asp-for="Name"></label>
+                                                <input asp-for="Name" class="form-control" placeholder="name.." />
+                                            </div>
+                                            <div style="display:flex">
+                                                <div class="form-group col-md-6">
+                                                    <label asp-for="Price"></label>
+                                                    <input asp-for="Price" type="number" class="form-control" />
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label asp-for="AgeRating"></label>
+                                                    <select asp-for="AgeRating" class="form-control"></select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="Description"></label>
+                                                <textarea asp-for="Description" class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="images">
+                                    <div class="row">
+                                        <h4 class="info-text col-md-12">Now add images</h4>
+                                        <div id="loadedImages" class="col-md-12">
+                                            <div class="images col-md-12">
+                                                <div class="pic" >
+                                                    add
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="video">
+                                    <div class="row">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="wizard-footer height-wizard">
+                                <div class="pull-right">
+                                    <input type='button' class='btn btn-next btn-fill btn-warning btn-wd btn-sm' name='next' value='Next' />
+                                    <input type='button' class='btn btn-finish btn-fill btn-warning btn-wd btn-sm' name='finish' value='Finish' />
+                                </div>
+
+                                <div class="pull-left">
+                                    <input type='button' class='btn btn-previous btn-fill btn-default btn-wd btn-sm' name='previous' value='Previous' />
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Price"></label>
-                    <input asp-for="Price" type="number" class="form-control" />
-                    <span asp-validation-for="Price"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="AgeRating"></label>
-                    <select asp-for="AgeRating" asp-items="Html.GetEnumSelectList<VideoStreamingShop.Core.Entities.AgeRating>()" class="form-control">
-                        <option selected="selected" value="">Please select</option>
-                    </select>
-                    <span asp-validation-for="AgeRating"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Description"></label>
-                    <textarea asp-for="Description" class="form-control"></textarea>
-                    <span asp-validation-for="Description"></span>
-                </div>
-                <input id="createVideoBtn" class="btn btn-success" type="submit" value="Create" />
-            </form>
+            </div>
         </div>
-        <div class="tab-pane fade" id="v-pills-video-images" role="tabpanel" aria-labelledby="v-pills-video-images-tab"> 
-            <form id="dropArea" method="post" class="dropzone" asp-action="UploadImagesForVideo" asp-controller="FileStorage">
-                <input type="hidden" id="videoId"/>
-                <div class="fallback">
-                    <input id="uploadfile" name="file" type="file" multiple />
-                </div>
-                <div id="loadedImages">
-                </div>
-                <div>
-                    <input class="btn btn-danger" type="submit" id="uploadfilebtn" />
-                </div>
-            </form>
-        </div>
     </div>
-</div>
 
-<script>
-    Dropzone.options.dropArea = {
-        maxFileSize: 2,
-        uploadMultiple: true,
-        maxFiles:5,
-        accept: function (file, done) {
-            console.log(done);
-        },
+    <script type="text/javascript" src="/lib/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="/js/jquery.bootstrap.wizard.js" type="text/javascript"></script>
 
-        previewTemplate: document.querySelector('#dropArea').innerHTML,
+    <script src="/js/gsdk-bootstrap-wizard.js"></script>
 
-        success: function (data) {
-            console.log(data);
-        },
-        addedfile: function (file) {
-            $("#dropArea").submit(function (e) {
-                e.preventDefault();
-                var formAction = $(this).attr("action");
-                var fdata = new FormData();
-                var files = file;
-                fdata.append(file.name, file);
-                $.ajax({
-                    method: "post",
-                    url: formAction + "?videoId=1",
-                    data: fdata,
-                    cache: false,
-                    processData: false,
-                    contentType: false,
-                }).done(function (result) {
-                    if (result.status == "success") {
-                        for (var i = 0; i < data.paths.length; i++) {
-                            $("#loadedImages").append("<img src='" + data.paths[i] + "'/>")
-                        }
-                    }
-                    else {
-                        console.log("Failed to load file")
-                    }
-                });
-            })
-        },
-        thumbnail: function (file, dataUrl) {
-            // Display the image in your file.previewElement
-        },
-        uploadprogress: function (file, progress, bytesSent) {
-            // Display the progress
+    <script>
+        $(document).ready(function () {
+            //generateTemplate();
+            uploadImage();
+        });
+
+        function generateTemplate() {
+            var t = $("#imageContainer");
+            var img = t.children("#image");
+            var fileInput = t.children("#imageInput");
+
+            fileInput.on("change", function (fileInput, img) {
+                if (input.files && input.files[0]) {
+                    let reader = new FileReader();
+                    reader.onload = function (e) {
+                        $(element)
+                            .attr('src', e.target.result)
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            });
+
+            img.click(() => {
+                //fileInput.click();
+                alert("Handler for .click() called.");
+            });
+
+            var clone = t.clone(true, true);
+            $("#loadedImages").append(clone.html());
+            clone.show();       
         }
-    };
-</script>
+
+        function uuidv4() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        }
+
+        function uploadImage() {
+            var button = $('.images .pic')
+            var uploader = $('<input type="file" accept="image/*" />')
+            var images = $('.images')
+
+            button.on('click', function () {
+                uploader.click()
+            })
+
+            uploader.on('change', function () {
+                var reader = new FileReader()
+                reader.onload = function (event) {
+                    images.prepend('<div class="img" style="background-image: url(\'' + event.target.result + '\');" rel="' + event.target.result + '"><span>remove</span></div>')
+                }
+                reader.readAsDataURL(uploader[0].files[0])
+            })
+
+            images.on('click', '.img', function () {
+                $(this).remove()
+            })
+        }
+    </script>
+</body>
+<style>
+    .images {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 20px;
+    }
+
+        .images .img,
+        .images .pic {
+            flex-basis: 31%;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+
+        .images .img {
+            width: 112px;
+            height: auto;
+            background-size: cover;
+            margin-right: 10px;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .images .img:nth-child(3n) {
+                margin-right: 0;
+            }
+
+            .images .img span {
+                display: none;
+                text-transform: capitalize;
+                z-index: 2;
+            }
+
+            .images .img::after {
+                content: '';
+                width: 100%;
+                height: 100%;
+                transition: opacity .1s ease-in;
+                border-radius: 4px;
+                opacity: 0;
+                position: absolute;
+            }
+
+            .images .img:hover::after {
+                display: block;
+                background-color: #000;
+                opacity: .5;
+            }
+
+            .images .img:hover span {
+                display: block;
+                color: #fff;
+            }
+
+        .images .pic {
+            background-color: #F5F7FA;
+            align-self: center;
+            text-align: center;
+            padding: 40px 0;
+            text-transform: uppercase;
+            color: #848EA1;
+            font-size: 12px;
+            cursor: pointer;
+        }
+</style>
+
+<template id="imageContainer">
+    <div id="imageContainerBody" class="card" style="display:flex">
+        <img id="image" class="card-image-top" style="max-width:100%; height:auto" src="~/AddImageIcon.png" onclick="{ }"/>
+        @*<div class="card-body">
+            <input id="imageInput" type="file" />
+        </div>*@
+    </div>
+</template>
+
+
+
+
+

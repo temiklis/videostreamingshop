@@ -10,8 +10,9 @@ namespace VideoStreamingShop.Core.Specifications
     {
         public VideoItemsSpecification(int page, int count)
         {
-            Query.Skip(count * page)
-                 .Take(count);
+            Query.Where(v => v.LinkedFile != null && v.Images.Count > 0)
+                .Skip(count * page)
+                .Take(count);
         }
     }
 }

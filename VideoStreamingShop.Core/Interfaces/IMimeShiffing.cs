@@ -6,6 +6,6 @@ namespace VideoStreamingShop.Core.Interfaces
 {
     public interface IMimeShiffing
     {
-        string MimeTypeFrom(byte[] dataBytes, string mimeProposed);
+        string MimeTypeFrom(byte[] dataBytes);
     }
 }

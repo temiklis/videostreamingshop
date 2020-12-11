@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using VideoStreamingShop.Core.Entities;
 using VideoStreamingShop.Core.Interfaces;
+using VideoStreamingShop.Core.Interfaces.Storage;
 
 namespace VideoStreamingShop.Core.Usecases.Videocases
 {
@@ -29,26 +30,12 @@ namespace VideoStreamingShop.Core.Usecases.Videocases
             if (!validationResult.IsValid)
                 return new CreateVideoResponseMessage(validationResult);
 
-
-            VideoFile videoFile = new VideoFile();
-            if(request.FileData != null && request.FileData.Length == 0)
-            {
-                var uri = await _videoFileStorage.UploadVideo(request.FileData);
-                videoFile = new VideoFile()
-                {
-                    Uri = uri,
-                    Version = "1",
-                    Name = string.Empty
-                };
-            }
-
             var video = new Video()
             {
                 Name = request.Name,
                 Description = request.Description,
                 Price = request.Price,
                 AgeRate = request.AgeRate,
-                LinkedFile = videoFile
             };
 
             var vd = await _repository.AddAsync<Video>(video);
@@ -74,7 +61,6 @@ namespace VideoStreamingShop.Core.Usecases.Videocases
         public string Description { get; set; }
         public decimal Price { get; set; }
         public AgeRating AgeRate { get; set; }
-        public byte[] FileData { get; set; }
     }
 
     public class CreateVideoResponseMessage

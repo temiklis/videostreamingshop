@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Threading.Tasks;
-using VideoStreamingShop.Core.Interfaces;
+using VideoStreamingShop.Core.Entities;
+using VideoStreamingShop.Core.Interfaces.Storage;
 
 namespace VideoStreamingShop.Infrasturcture.Services
 {
@@ -27,13 +26,14 @@ namespace VideoStreamingShop.Infrasturcture.Services
             throw new NotImplementedException();
         }
 
-        public async Task<string> Upload(byte[] data)
+        public async Task<string> Upload(byte[] data, Extension format)
         {
             CreateDefaultDirectoryIfNotExist();
 
-            string generatedName = Guid.NewGuid().ToString();
-            string filepath = Path.Combine(_storagePath, generatedName);
-            using (FileStream stream = new FileStream(filepath, FileMode.OpenOrCreate))
+            string generatedName = $"{Guid.NewGuid().ToString()}.{format.ToString()}";
+            string filepath = $"{_storagePath}/{generatedName}";
+
+            using (FileStream stream = new FileStream(filepath, FileMode.Create))
             {
                 stream.Seek(0, SeekOrigin.End);
                 await stream.WriteAsync(data, 0, data.Length); 

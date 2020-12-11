@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Autofac;
@@ -11,6 +12,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using VideoStreamingShop.Core.Usecases;
 using VideoStreamingShop.Core.Usecases.Storage;
@@ -38,9 +40,7 @@ namespace VideoStreamingShop.MVC
                 .AddFluentValidation();
             services.AddMediatR(typeof(Startup));
             services.AddAutoMapper(typeof(Startup));
-            services.AddTransient<UploadVideoIteractor>();
             services.AddTransient<CreateVideoIteractor>();
-            services.AddTransient<UploadImagesForVideoInteractor>();
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
@@ -63,6 +63,13 @@ namespace VideoStreamingShop.MVC
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseFileServer(new FileServerOptions()
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "AppFolder")),
+                RequestPath = new Microsoft.AspNetCore.Http.PathString("/AppFolder"),
+                EnableDirectoryBrowsing = false
+            });
 
             app.UseRouting();
 

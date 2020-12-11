@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using VideoStreamingShop.Core.Entities;
 using VideoStreamingShop.Core.Infrascturucre;
 using VideoStreamingShop.Core.Interfaces;
+using VideoStreamingShop.Core.Interfaces.FileExtensions;
+using VideoStreamingShop.Core.Interfaces.Storage;
 
 namespace VideoStreamingShop.Core.Usecases.Storage
 {
@@ -44,7 +46,8 @@ namespace VideoStreamingShop.Core.Usecases.Storage
             {
                 if (_fileExtension.Validate(data))
                 {
-                    var uri = await _imageStorage.Upload(data);
+                    var format = _fileExtension.GetFormat(data);
+                    var uri = await _imageStorage.Upload(data, format);
 
                     var image = new VideoImage()
                     {

@@ -1,12 +1,16 @@
 ﻿using Autofac;
 using Autofac.Core;
+using Autofac.Features.AttributeFilters;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
+using VideoStreamingShop.Core.Entities;
 using VideoStreamingShop.Core.Infrascturucre;
 using VideoStreamingShop.Core.Interfaces;
+using VideoStreamingShop.Core.Interfaces.FileExtensions;
+using VideoStreamingShop.Core.Interfaces.Storage;
 using VideoStreamingShop.Core.Usecases;
 using VideoStreamingShop.Core.Usecases.Storage;
 using VideoStreamingShop.Core.Usecases.Videocases;
@@ -59,11 +63,23 @@ namespace VideoStreamingShop.Infrasturcture
             builder
                 .RegisterType<ImageFileExtension>()
                 .Keyed<IFileExtension>(FileType.Image)
-                .InstancePerLifetimeScope();
+                .WithParameter(
+                    (p, c) => p.ParameterType == typeof(List<Extension>),
+                    (p, c) => new List<Extension>()
+                    { 
+                        Extension.JPEG, 
+                        Extension.PNG 
+                    });
 
             builder.RegisterType<VideoFileExtension>()
                 .Keyed<IFileExtension>(FileType.Video)
-                .InstancePerLifetimeScope();
+                .WithParameter(
+                    (p, c) => p.ParameterType == typeof(List<Extension>),
+                    (p, c) => new List<Extension>()
+                    {
+                        Extension.MP4,
+                        Extension.AVI
+                    });
 
             LoadStoragies(builder);
 
@@ -86,8 +102,20 @@ namespace VideoStreamingShop.Infrasturcture
             builder.RegisterType<UploadImagesForVideoValidator>()
                 .As<IValidator<UploadImagesForVideoRequestMessage>>()
                 .InstancePerLifetimeScope();
-        }
 
+            builder.RegisterType<UploadImagesForVideoInteractor>()
+                .WithAttributeFiltering();
+
+            builder.RegisterType<UploadVideoIteractor>()
+                .WithAttributeFiltering();
+
+            builder.RegisterType<CvsFileExtensionTranslator>()
+                .As<IFileExtensionTranslator>()
+                .WithParameter(
+                    (p, c) => p.ParameterType == typeof(string) && p.Name == "pathToTranslationFile",
+                    (p, c) => "AppFolder/Csv/meme1.csv")
+                .InstancePerLifetimeScope();
+        }
         private static void LoadStoragies(ContainerBuilder builder)
         {
             builder.
