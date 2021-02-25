@@ -16,13 +16,11 @@ namespace VideoStreamingShop.Core.Usecases.Videocases
     {
         //need to add automapper here
         private readonly IRepository _repository;
-        private readonly IVideoFileStorage _videoFileStorage;
         private readonly IValidator<CreateVideoRequestMessage> _validator;
-        public CreateVideoIteractor(IRepository repository, IValidator<CreateVideoRequestMessage> validator, IVideoFileStorage videoFileStorage)
+        public CreateVideoIteractor(IRepository repository, IValidator<CreateVideoRequestMessage> validator)
         {
             _validator = validator;
             _repository = repository;
-            _videoFileStorage = videoFileStorage;
         }
         public async Task<CreateVideoResponseMessage> Handle(CreateVideoRequestMessage request, CancellationToken cancellationToken)
         {

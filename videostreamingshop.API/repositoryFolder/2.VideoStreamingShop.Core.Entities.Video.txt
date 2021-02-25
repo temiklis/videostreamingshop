@@ -1,0 +1,1 @@
+{"IsCompleted":false,"Name":"Avatar","Description":"test description","Price":12.0,"AgeRate":3,"Images":null,"LinkedFile":null,"Id":2}

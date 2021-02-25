@@ -1,0 +1,10 @@
+﻿
+<div class="card border border-dark">
+    <img class="card-img-top" src="@videoCard.ImageUri" />
+    <h4>@videoCard.AgeRate</h4>
+    <div class="card-body">
+        <h6 class="card-title">@videoCard.Name</h6>
+        <p class="card-text text">@videoCard.Description</p>
+        <a asp-route-id="@videoCard.Id" class="btn btn-danger" @onclick="@(e =>  OnDetailsClick(@videoCard.Id))">Watch now</a>
+    </div>
+</div>

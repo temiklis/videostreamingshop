@@ -1,1 +1,0 @@
-{"Name":"Mortal Kombat Legends: Scorpion's Revenge","Description":"The champions of Outworld and Earthrealm fight to the death in a brutal tournament that determines the fate of Earth.","Price":13.0,"AgeRate":4,"Images":null,"LinkedFile":{"Name":null,"Version":null,"Uri":null,"Id":0},"Id":2}

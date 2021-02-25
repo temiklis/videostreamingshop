@@ -3,11 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30517.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoStreamingShop.Core", "VideoStreamingShop.Core\VideoStreamingShop.Core.csproj", "{27762C42-19D2-4703-AD93-0545B7A98270}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoStreamingShop.Core", "VideoStreamingShop.Core\VideoStreamingShop.Core.csproj", "{27762C42-19D2-4703-AD93-0545B7A98270}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoStreamingShop.Infrasturcture", "VideoStreamingShop.Infrasturcture\VideoStreamingShop.Infrasturcture.csproj", "{CE81649B-B7A7-4EF6-B1C0-588323A1EBD0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoStreamingShop.Infrasturcture", "VideoStreamingShop.Infrasturcture\VideoStreamingShop.Infrasturcture.csproj", "{CE81649B-B7A7-4EF6-B1C0-588323A1EBD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoStreamingShop.MVC", "VideoStreamingShop.MVC\VideoStreamingShop.MVC.csproj", "{17801811-6221-4F7B-85E6-E3994E26E1BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "videostreamingshop.Core.Test", "videostreamingshop.Test\videostreamingshop.Core.Test.csproj", "{EA503D05-7EAA-4A8E-81D9-33B2B9A0B6C2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoStreamingShop.API", "videostreamingshop.API\VideoStreamingShop.API.csproj", "{B205C0AA-0DF3-4B9E-B97D-DB9CEF431489}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoStreamingShop.API.TEST", "VideoStreamingShop.API.TEST\VideoStreamingShop.API.TEST.csproj", "{5A0D6174-48B9-43F7-9CCF-240E0A64B59A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoStreamingShop.Web", "VideoStreamingShop.Web\VideoStreamingShop.Web.csproj", "{56CACB9A-C7BE-48ED-B487-5EFE5B45674A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +29,22 @@ Global
 		{CE81649B-B7A7-4EF6-B1C0-588323A1EBD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE81649B-B7A7-4EF6-B1C0-588323A1EBD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE81649B-B7A7-4EF6-B1C0-588323A1EBD0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{17801811-6221-4F7B-85E6-E3994E26E1BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{17801811-6221-4F7B-85E6-E3994E26E1BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{17801811-6221-4F7B-85E6-E3994E26E1BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{17801811-6221-4F7B-85E6-E3994E26E1BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA503D05-7EAA-4A8E-81D9-33B2B9A0B6C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA503D05-7EAA-4A8E-81D9-33B2B9A0B6C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA503D05-7EAA-4A8E-81D9-33B2B9A0B6C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA503D05-7EAA-4A8E-81D9-33B2B9A0B6C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B205C0AA-0DF3-4B9E-B97D-DB9CEF431489}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B205C0AA-0DF3-4B9E-B97D-DB9CEF431489}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B205C0AA-0DF3-4B9E-B97D-DB9CEF431489}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B205C0AA-0DF3-4B9E-B97D-DB9CEF431489}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A0D6174-48B9-43F7-9CCF-240E0A64B59A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A0D6174-48B9-43F7-9CCF-240E0A64B59A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A0D6174-48B9-43F7-9CCF-240E0A64B59A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A0D6174-48B9-43F7-9CCF-240E0A64B59A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56CACB9A-C7BE-48ED-B487-5EFE5B45674A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56CACB9A-C7BE-48ED-B487-5EFE5B45674A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56CACB9A-C7BE-48ED-B487-5EFE5B45674A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56CACB9A-C7BE-48ED-B487-5EFE5B45674A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

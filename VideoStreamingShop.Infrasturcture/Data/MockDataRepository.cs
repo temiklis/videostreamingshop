@@ -15,8 +15,8 @@ namespace VideoStreamingShop.Infrasturcture.Data
 {
     public class MockDataRepository : IRepository
     {
-        private string fileExtension = "txt";
-        private string folder = "repositoryFolder";
+        private readonly string fileExtension = "txt";
+        private readonly string folder = "repositoryFolder";
         public MockDataRepository()
         {
             if (!Directory.Exists(folder))
@@ -84,7 +84,7 @@ namespace VideoStreamingShop.Infrasturcture.Data
         public async Task<List<T>> GetListAsync<T>() where T : Entity
         {
             var results = new List<T>();
-            var files = Directory.GetFiles($"{folder}", $"*.{typeof(T).ToString()}.{fileExtension}");
+            var files = Directory.GetFiles($"{folder}", $"*.{typeof(T)}.{fileExtension}");
             foreach (var path in files)
             {
                 using (StreamReader reader = new StreamReader(path))

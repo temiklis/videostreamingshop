@@ -1,6 +1,8 @@
 ﻿using Ardalis.Specification;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,28 +16,25 @@ namespace VideoStreamingShop.Infrasturcture.Services
     internal class VideoService : IVideoService
     {
         private readonly IRepository _repository;
-        public VideoService(IRepository repository)
+        private readonly IMapper _mapper;
+        public VideoService(IRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
-        public async Task<List<VideoDTO>> GetAllVideo(int page, int count)
+        public async Task<IEnumerable<VideoDTO>> GetAllVideo(int page, int count)
         {
             var specification = new VideoItemsSpecification(page, count);
             var videos = await _repository.GetListAsync(specification);
 
-            var videoDtos = videos.ConvertAll<VideoDTO>(video =>
-            {
-                return new VideoDTO()
-                {
-                    Id = video.Id,
-                    Name = video.Name,
-                    Price = video.Price,
-                    Description = video.Description,
-                    AgeRate = video.AgeRate.ToString(),
-                    ImageUri = video.Images?.FirstOrDefault()?.Uri
-                };
-            });
-            return videoDtos;
+            var dtos = _mapper.Map<IEnumerable<VideoDTO>>(videos);
+
+            return dtos;
+        }
+
+        public Task<VideoDTO> GetNotFullyCreatedVideos()
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<VideoDTO> GetVideoById(int id)
@@ -44,17 +43,14 @@ namespace VideoStreamingShop.Infrasturcture.Services
             if (video == null)
                 return null;
 
-            var videoDTo = new VideoDTO()
-            {
-                Id = video.Id,
-                Name = video.Name,
-                Price = video.Price,
-                Description = video.Description,
-                AgeRate = video.AgeRate.ToString(),
-                ImageUri = video.Images?.FirstOrDefault()?.Uri
-            };
+            var videoDTo = _mapper.Map<VideoDTO>(video);
 
             return videoDTo;
+        }
+
+        public Task<string> UploadVideoFile(Stream stream)
+        {
+            throw new NotImplementedException();
         }
     }
 }

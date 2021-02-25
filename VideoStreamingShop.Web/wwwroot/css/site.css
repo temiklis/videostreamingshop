@@ -1,0 +1,17 @@
+@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+
+body{
+    background-color:black;
+}
+
+h1{
+    color:white;
+}
+
+h2{
+    color:azure;
+}
+
+p{
+    color:white;
+}

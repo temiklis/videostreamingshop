@@ -1,0 +1,12 @@
+﻿@page "/home";
+
+@using VideoStreamingShop.Web.Pages.Templates;
+@using VideoStreamingShop.Web.Pages.Cards;
+
+<TableTemplate Items="videoCards" Context="card">
+    <RowTemplate>
+        <VideoCard videoCard="@card">
+
+        </VideoCard>
+    </RowTemplate>
+</TableTemplate>

@@ -15,7 +15,6 @@ using VideoStreamingShop.Core.Interfaces.Storage;
 
 namespace VideoStreamingShop.Core.Usecases.Storage
 {
-#warning Need some time for mind that.Because we need to save images to storage and connect it's to video. 
     public sealed class UploadImagesForVideoInteractor : IRequestHandler<UploadImagesForVideoRequestMessage, UploadImagesForVideoResponseMessage>
     {
         private readonly IImageStorage _imageStorage;
@@ -39,27 +38,23 @@ namespace VideoStreamingShop.Core.Usecases.Storage
             var video = await _repository.GetByIdAsync<Video>(request.VideoId);
 
             if (video == null)
+            {
+                //remove that after testing
+                validationResult.Errors.Add(new FluentValidation.Results.ValidationFailure("video", "not found 404"));
                 return new UploadImagesForVideoResponseMessage(validationResult);
+            }
 
             List<string> imageUris = new List<string>();
             foreach (var data in request.FilesData)
             {
-                if (_fileExtension.Validate(data))
-                {
-                    var format = _fileExtension.GetFormat(data);
-                    var uri = await _imageStorage.Upload(data, format);
+                var uri = await _imageStorage.Upload(data);
 
-                    var image = new VideoImage()
-                    {
-                        Name = Guid.NewGuid().ToString(),
-                        Uri = uri
-                    };
+                var image = new VideoImage(Guid.NewGuid().ToString(), uri);
 
-                    imageUris.Add(uri);
+                imageUris.Add(uri);
 
-                    video.RegisterImage(image);
-                    await _repository.AddAsync<Video>(video);
-                }
+                video.RegisterImage(image);
+                await _repository.AddAsync<Video>(video);
             }
 
             return new UploadImagesForVideoResponseMessage(validationResult, imageUris);

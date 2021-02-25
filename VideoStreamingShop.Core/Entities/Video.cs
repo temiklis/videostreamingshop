@@ -12,6 +12,8 @@ namespace VideoStreamingShop.Core.Entities
         public AgeRating AgeRate { get; set; }
         public List<VideoImage> Images { get; set; }
         public VideoFile LinkedFile { get; set; }
+
+        public bool IsCompleted;
         public Video() { }
         public Video(string name, string description, decimal price, AgeRating ageRate)
         {

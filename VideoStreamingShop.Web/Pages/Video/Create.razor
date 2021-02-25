@@ -1,0 +1,30 @@
+﻿@page "/video/create";
+
+@using VideoStreamingShop.Web.Shared.Components;
+@using VideoStreamingShop.Web.Models;
+
+<h3>Create</h3>
+
+<EditForm Model="@createVideoViewModel" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="form-group">
+        <label></label>
+        <AwesomeInputText id="name" @bind-Value="createVideoViewModel.Name" />
+    </div>
+    <div class="form-group">
+        <AwesomeInputText id="price" @bind-Value="createVideoViewModel.Price" />
+    </div>
+    <div class="form-group">
+        <InputSelect @bind-Value="createVideoViewModel.AgeRate">
+            @foreach (var gender in Enum.GetValues(typeof(AgeRating)))
+            {
+                <option value="@gender">@gender</option>
+            }
+        </InputSelect>
+    </div>
+    <div class="form-group">
+        <InputTextArea id="description" @bind-Value="createVideoViewModel.Description" />
+    </div>
+    <button type="submit" class="btn btn-danger">Create</button>
+</EditForm>
