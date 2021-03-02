@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Components;
 
 namespace VideoStreamingShop.Web.Pages
 {
-    public partial class Home
-    {
+    public partial class Home : ComponentBase
+    { 
         [Inject]
         private IVideoService _videoService { get; set; }
 

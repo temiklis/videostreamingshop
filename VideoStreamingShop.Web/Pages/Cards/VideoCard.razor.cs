@@ -9,7 +9,7 @@ using VideoStreamingShop.Web.ViewModels;
 
 namespace VideoStreamingShop.Web.Pages.Cards
 {
-    public partial class VideoCard
+    public partial class VideoCard : ComponentBase
     {
         [Inject]
         private NavigationManager navigationManager { get; set; }
@@ -18,6 +18,7 @@ namespace VideoStreamingShop.Web.Pages.Cards
 
         [Parameter]
         public VideoCardViewModel videoCard { get; set; }
+
         protected override void OnInitialized()
         {
             base.OnInitialized();

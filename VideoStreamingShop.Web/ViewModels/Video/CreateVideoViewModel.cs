@@ -20,7 +20,6 @@ namespace VideoStreamingShop.Web.ViewModels.Video
         [Required]
         public string Price { get; set; }
         [Required]
-        [Custom(typeof(EnumValidation<AgeRating>))]
         public string AgeRate { get; set; }
     }
 }

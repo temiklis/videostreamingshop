@@ -2,28 +2,21 @@
     background-color: #EF5252;
 }
 
+::deep .navbar .navbar-collapse {
+    background-color: #000;
+}
+
 .navbar-custom .navbar-brand,
-.navbar-custom .navbar-text {
+.navbar-custom ::deep .navbar-text {
     color: white;
 }
 
-.navbar-custom .navbar-nav .nav-link {
+/* change the link color */
+.navbar-custom .navbar-nav ::deep .nav-link {
     color: white;
 }
-
-.navbar-custom .nav-item.active .nav-link,
-.navbar-custom .nav-item:hover .nav-link {
-    color: #ffffff;
-}
-
-.navbar-custom .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-    color: #fff;
-    background-color: #EF5252;
-    border-color: #1861ac;
-}
-
-a.navbar-brand {
-    white-space: normal;
-    text-align: center;
-    word-break: break-all;
+/* change the color of active or hovered links */
+::deep .navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item:hover ::deep .nav-link {
+    color: aquamarine;
 }

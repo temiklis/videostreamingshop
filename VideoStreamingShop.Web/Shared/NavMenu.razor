@@ -1,24 +1,15 @@
-﻿<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-custom">
+﻿<nav class="navbar navbar-expand-sm navbar-custom ">
     <div class="container">
         <a class="navbar-brand" href="#">blazornav</a>
-        <button class="navbar-toggler" type="button" @onclick="ToggleNavMenu">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-            <ul class="navbar-nav flex-grow-1">
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <NavLink class="nav-link text-dark" href="" Match="NavLinkMatch.All">
+                    <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
                         <span class="oi oi-home" aria-hidden="true"></span> Home
-                    </NavLink>
-                </li>
-                <li class="nav-item">
-                    <NavLink class="nav-link text-dark" href="counter">
-                        <span class="oi oi-plus" aria-hidden="true"></span> Counter
-                    </NavLink>
-                </li>
-                <li class="nav-item">
-                    <NavLink class="nav-link text-dark" href="fetchdata">
-                        <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
                     </NavLink>
                 </li>
             </ul>
@@ -29,7 +20,7 @@
 @code {
     bool collapseNavMenu = true;
 
-    string baseMenuClass = "navbar-collapse d-sm-inline-flex flex-sm-row-reverse";
+    string baseMenuClass = "collapse navbar-collapse";
 
     string NavMenuCssClass => baseMenuClass + (collapseNavMenu ? " collapse" : "");
 

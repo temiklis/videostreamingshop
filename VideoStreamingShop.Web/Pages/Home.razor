@@ -1,4 +1,5 @@
-﻿@page "/home";
+﻿@page "/";
+@page "/home";
 
 @using VideoStreamingShop.Web.Pages.Templates;
 @using VideoStreamingShop.Web.Pages.Cards;
@@ -10,3 +11,10 @@
         </VideoCard>
     </RowTemplate>
 </TableTemplate>
+
+@if (videoCards.Count == 0)
+{
+    <div class="container">
+        <h1>No Content</h1>
+    </div>
+}
