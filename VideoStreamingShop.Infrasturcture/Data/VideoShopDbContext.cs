@@ -11,7 +11,7 @@ namespace VideoStreamingShop.Infrasturcture.Data
         public DbSet<Video> Videos { get; set; }
         public VideoShopDbContext(DbContextOptions options): base(options)
         {
-
+            Database.EnsureCreated();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
