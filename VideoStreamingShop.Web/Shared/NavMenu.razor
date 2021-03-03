@@ -1,23 +1,4 @@
-﻿<!--<nav class="navbar navbar-expand-sm navbar-custom ">
-    <div class="container">
-        <a class="navbar-brand" href="#">blazornav</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>-->
-
-        @*<div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                        <span class="oi oi-home" aria-hidden="true"></span> Home
-                    </NavLink>
-                </li>
-            </ul>
-        </div>*@
-    <!--</div>
-</nav>-->
-
-<BSNavbar IsExpand="true" IsDark="false" Class="navbar-custom" Color="Color.Danger">
+﻿<BSNavbar IsExpand="true" IsDark="false" Class="navbar-custom" Color="Color.Danger">
     <BSNavbarBrand Href="javascript:void(0);" Class="text-white">VideoShop</BSNavbarBrand>
     <BSNavbarToggler @onclick="onclick"/>
     <BSCollapse @ref="NavbarCollapse" IsNavbar="true" IsOpenChanged="OpenChanged">
@@ -29,10 +10,6 @@
                 <BSNavLink Href="/Video/Create" Class="text-white">Create</BSNavLink>
             </BSNavItem>
         </BSNav>
-        @*<BSForm IsInline="true" Class="my-2 my-lg-0" Model="@formsModel">
-            <BSInput InputType="InputType.Search" PlaceHolder="Search" Class="mr-sm-2" @bind-Value="formsModel.Blank" />
-            <BSButton IsOutline="true" Color="Color.Success" ButtonType="ButtonType.Submit" Class="my-2 my-sm-0">Search</BSButton>
-        </BSForm>*@
     </BSCollapse>
 </BSNavbar>
 
