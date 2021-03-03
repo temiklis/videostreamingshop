@@ -1,11 +1,11 @@
-﻿<nav class="navbar navbar-expand-sm navbar-custom ">
+﻿<!--<nav class="navbar navbar-expand-sm navbar-custom ">
     <div class="container">
         <a class="navbar-brand" href="#">blazornav</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-        </button>
+        </button>-->
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        @*<div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
@@ -13,19 +13,54 @@
                     </NavLink>
                 </li>
             </ul>
-        </div>
-    </div>
-</nav>
+        </div>*@
+    <!--</div>
+</nav>-->
+
+<BSNavbar IsExpand="true" IsDark="false" Class="navbar-custom" Color="Color.Danger">
+    <BSNavbarBrand Href="javascript:void(0);" Class="text-white">VideoShop</BSNavbarBrand>
+    <BSNavbarToggler @onclick="onclick"/>
+    <BSCollapse @ref="NavbarCollapse" IsNavbar="true" IsOpenChanged="OpenChanged">
+        <BSNav IsList="true" Class="mr-auto" IsNavbar="true">
+            <BSNavItem>
+                <BSNavLink IsActive="true" Href="/Home" Class="text-white">Home</BSNavLink>
+            </BSNavItem>
+            <BSNavItem>
+                <BSNavLink Href="/Video/Create" Class="text-white">Create</BSNavLink>
+            </BSNavItem>
+        </BSNav>
+        @*<BSForm IsInline="true" Class="my-2 my-lg-0" Model="@formsModel">
+            <BSInput InputType="InputType.Search" PlaceHolder="Search" Class="mr-sm-2" @bind-Value="formsModel.Blank" />
+            <BSButton IsOutline="true" Color="Color.Success" ButtonType="ButtonType.Submit" Class="my-2 my-sm-0">Search</BSButton>
+        </BSForm>*@
+    </BSCollapse>
+</BSNavbar>
 
 @code {
-    bool collapseNavMenu = true;
+    private BSCollapse NavbarCollapse;
+    private FormsModel formsModel = new FormsModel();
+    bool UserControlledIsOpen { get; set; } = true;
 
-    string baseMenuClass = "collapse navbar-collapse";
-
-    string NavMenuCssClass => baseMenuClass + (collapseNavMenu ? " collapse" : "");
-
-    void ToggleNavMenu()
+    void onclick(MouseEventArgs e)
     {
-        collapseNavMenu = !collapseNavMenu;
+        NavbarCollapse.Toggle();
+        Console.WriteLine("Navbar State->" + NavbarCollapse.IsOpen.ToString());
+    }
+
+    void OpenChanged(bool e)
+    {
+        Console.WriteLine("OpenChanged->" + e.ToString());
+    }
+
+    void UserControlledClick(MouseEventArgs e)
+    {
+        UserControlledIsOpen = !UserControlledIsOpen;
+        StateHasChanged();
+
+    }
+
+    public class FormsModel
+    {
+        public string Blank { get; set; }
     }
 }

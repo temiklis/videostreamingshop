@@ -1,3 +1,4 @@
+using BlazorStrap;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -51,6 +52,8 @@ namespace VideoStreamingShop.Web
                 client.BaseAddress = new Uri(Configuration["ApiSettings:BaseAddress"]);
             });
 
+
+            services.AddBootstrapCss();
             //services.AddTransient<IVideoService, VideoService>();
         }
 

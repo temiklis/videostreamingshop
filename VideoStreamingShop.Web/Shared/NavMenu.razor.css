@@ -2,21 +2,6 @@
     background-color: #EF5252;
 }
 
-::deep .navbar .navbar-collapse {
-    background-color: #000;
-}
-
-.navbar-custom .navbar-brand,
-.navbar-custom ::deep .navbar-text {
-    color: white;
-}
-
-/* change the link color */
-.navbar-custom .navbar-nav ::deep .nav-link {
-    color: white;
-}
-/* change the color of active or hovered links */
-::deep .navbar-custom .nav-item.active .nav-link,
-.navbar-custom .nav-item:hover ::deep .nav-link {
-    color: aquamarine;
+.text-white {
+    color:white;
 }
