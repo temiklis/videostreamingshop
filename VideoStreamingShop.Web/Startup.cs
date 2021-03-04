@@ -45,7 +45,6 @@ namespace VideoStreamingShop.Web
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
-            services.AddSingleton<WeatherForecastService>();
 
             services.AddHttpClient<IVideoService, VideoService>(client =>
             {
