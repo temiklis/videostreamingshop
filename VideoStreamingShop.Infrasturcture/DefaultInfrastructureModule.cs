@@ -7,6 +7,7 @@ using VideoStreamingShop.Core.Interfaces;
 using VideoStreamingShop.Core.Interfaces.FileExtensions;
 using VideoStreamingShop.Infrasturcture.Modules;
 using VideoStreamingShop.Infrasturcture.Services;
+using VideoStreamingShop.Infrasturcture.Services.FileExtensions;
 using Module = Autofac.Module;
 
 namespace VideoStreamingShop.Infrasturcture

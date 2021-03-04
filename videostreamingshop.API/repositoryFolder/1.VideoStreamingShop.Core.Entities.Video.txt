@@ -1,1 +1,0 @@
-{"IsCompleted":false,"Name":"Hello","Description":"asdjlasjdosaljdlads","Price":12.0,"AgeRate":0,"Images":null,"LinkedFile":null,"Id":1}
