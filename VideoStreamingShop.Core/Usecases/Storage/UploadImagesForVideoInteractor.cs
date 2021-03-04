@@ -3,18 +3,20 @@ using FluentValidation;
 using MediatR;
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using VideoStreamingShop.Core.Entities;
 using VideoStreamingShop.Core.Infrascturucre;
+using VideoStreamingShop.Core.Infrastructure.Commands.Storage;
 using VideoStreamingShop.Core.Interfaces;
 using VideoStreamingShop.Core.Interfaces.FileExtensions;
 using VideoStreamingShop.Core.Interfaces.Storage;
 
 namespace VideoStreamingShop.Core.Usecases.Storage
 {
+    /// <summary>
+    /// Upload images for video to the storage.
+    /// </summary>
     public sealed class UploadImagesForVideoInteractor : IRequestHandler<UploadImagesForVideoRequestMessage, UploadImagesForVideoResponseMessage>
     {
         private readonly IImageStorage _imageStorage;
@@ -58,31 +60,6 @@ namespace VideoStreamingShop.Core.Usecases.Storage
             }
 
             return new UploadImagesForVideoResponseMessage(validationResult, imageUris);
-        }
-    }
-
-    public class UploadImagesForVideoValidator : AbstractValidator<UploadImagesForVideoRequestMessage>
-    {
-        public UploadImagesForVideoValidator()
-        {
-            RuleFor(r => r.VideoId).NotEmpty() ;
-            RuleFor(r => r.FilesData.Count).LessThan(4);
-        }
-    }
-
-    public class UploadImagesForVideoRequestMessage : IRequest<UploadImagesForVideoResponseMessage>
-    {
-        public int VideoId { get; set; }
-        public List<byte[]> FilesData { get; set; }
-    }
-    public class UploadImagesForVideoResponseMessage
-    {
-        public FluentValidation.Results.ValidationResult ValidationResult { get; private set; }
-        public List<string> Paths { get; private set; }
-        public UploadImagesForVideoResponseMessage(FluentValidation.Results.ValidationResult validationResult, List<string> paths = null)
-        {
-            ValidationResult = validationResult;
-            Paths = paths;
         }
     }
 

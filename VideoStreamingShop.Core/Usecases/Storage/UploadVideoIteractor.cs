@@ -2,19 +2,20 @@
 using FluentValidation;
 using FluentValidation.Results;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using VideoStreamingShop.Core.Entities;
 using VideoStreamingShop.Core.Infrascturucre;
+using VideoStreamingShop.Core.Infrastructure.Commands.Storage;
 using VideoStreamingShop.Core.Interfaces;
 using VideoStreamingShop.Core.Interfaces.FileExtensions;
 using VideoStreamingShop.Core.Interfaces.Storage;
 
 namespace VideoStreamingShop.Core.Usecases.Storage
 {
+    /// <summary>
+    /// Upload video to the storage.
+    /// </summary>
     public class UploadVideoIteractor : IRequestHandler<UploadVideoRequestMessage, UploadVideoResponseMessage>
     {
         private readonly IRepository _repository;
@@ -63,35 +64,5 @@ namespace VideoStreamingShop.Core.Usecases.Storage
 
             return new UploadVideoResponseMessage(validationResult, request.VideoId, uri);
         }
-    }
-
-    public class UploadVideoRequestMessageValidator : AbstractValidator<UploadVideoRequestMessage>
-    { 
-        public UploadVideoRequestMessageValidator()
-        {
-            RuleFor(r => r.VideoId).NotEmpty();
-            RuleFor(r => r.VideoName).NotEmpty();
-        }
-    }
-
-    public class UploadVideoRequestMessage : IRequest<UploadVideoResponseMessage>
-    {
-        public int VideoId { get; set; }
-        public string VideoName { get; set; }
-        public byte[] Data { get; set; }
-    }
-
-    public class UploadVideoResponseMessage 
-    {
-        public ValidationResult validationResult { get; }
-
-        public UploadVideoResponseMessage(ValidationResult validationResult, int? videoId = null, string uri = null)
-        {
-            this.validationResult = validationResult;
-            this.VideoId = videoId;
-            this.Uri = uri;
-        }
-        public int? VideoId { get; private set; }
-        public string Uri { get; private set; }
     }
 }

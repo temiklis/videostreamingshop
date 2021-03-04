@@ -1,17 +1,15 @@
-﻿using FluentValidation;
-using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-using VideoStreamingShop.Core.DTOs;
 using VideoStreamingShop.Core.Entities;
 using VideoStreamingShop.Core.Interfaces;
 using VideoStreamingShop.Core.Specifications;
 
 namespace VideoStreamingShop.Core.Usecases.Videocases
 {
+    /// <summary>
+    /// Returns videos which have base information, but haven't images and video file.
+    /// </summary>
     public class GetNotFullyCreatedVideosIteractor : IRequestHandler<GetNotFullyCreatedVideosRequest, GetNotFullyCreatedVideosResponse>
     {
         private readonly IRepository _repository;
@@ -28,30 +26,5 @@ namespace VideoStreamingShop.Core.Usecases.Videocases
 
             return new GetNotFullyCreatedVideosResponse() { Videos = videos };
         }
-    }
-
-    public class GetNotFullyCreatedVideosValidator : AbstractValidator<GetNotFullyCreatedVideosRequest>
-    {
-        public GetNotFullyCreatedVideosValidator()
-        {
-
-        }
-    }
-
-    public class GetNotFullyCreatedVideosRequest : IRequest<GetNotFullyCreatedVideosResponse>
-    {
-        public int Count { get; set; }
-        public int Skip { get; set; }
-
-        public GetNotFullyCreatedVideosRequest(int count = 20, int skip = 0)
-        {
-            Count = count;
-            Skip = skip;
-        }
-    }
-
-    public class GetNotFullyCreatedVideosResponse
-    {
-        public IEnumerable<Video> Videos { get; internal set; }
     }
 }

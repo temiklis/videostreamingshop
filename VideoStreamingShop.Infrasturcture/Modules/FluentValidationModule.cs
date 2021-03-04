@@ -3,8 +3,8 @@ using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using VideoStreamingShop.Core.Usecases.Storage;
-using VideoStreamingShop.Core.Usecases.Videocases;
+using VideoStreamingShop.Core.Infrastructure.Validations.Storage;
+using VideoStreamingShop.Core.Infrastructure.Validations.Video;
 
 namespace VideoStreamingShop.Infrasturcture.Modules
 {

@@ -1,17 +1,18 @@
 ﻿using FluentValidation;
-using FluentValidation.Results;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using VideoStreamingShop.Core.Entities;
+using VideoStreamingShop.Core.Infrastructure.Commands.Storage;
 using VideoStreamingShop.Core.Interfaces;
 using VideoStreamingShop.Core.Interfaces.Storage;
 
 namespace VideoStreamingShop.Core.Usecases.Storage
 {
+    /// <summary>
+    /// Download video to storage.
+    /// Use mediatR to access to this case.
+    /// </summary>
     public class DownloadVideoInteractor : IRequestHandler<DownloadVideoRequestMessage, DownloadVideoResponseMessage>
     {
         public readonly IRepository _repository;
@@ -37,31 +38,5 @@ namespace VideoStreamingShop.Core.Usecases.Storage
 
             return new DownloadVideoResponseMessage(validatorResult, video.Id, data);
         }
-    }
-
-    public class DownloadVideoResponseMessageValidator : AbstractValidator<DownloadVideoRequestMessage>
-    {
-        public DownloadVideoResponseMessageValidator()
-        {
-            RuleFor(r => r.VideoId).NotEmpty();
-        }
-    }
-
-    public class DownloadVideoRequestMessage : IRequest<DownloadVideoResponseMessage>
-    {
-        public int VideoId { get; set; }
-    }
-
-    public class DownloadVideoResponseMessage
-    {
-        public ValidationResult ValidationResult { get; private set; }
-        public DownloadVideoResponseMessage(ValidationResult validationResult, int? videoId = null, byte[] data = default)
-        {
-            this.ValidationResult = validationResult;
-            VideoId = videoId;
-            Data = data;
-        }
-        public int? VideoId { get; private set; }
-        public byte[] Data { get; private set; }
     }
 }

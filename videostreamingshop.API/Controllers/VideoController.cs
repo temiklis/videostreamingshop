@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using VideoStreamingShop.Core.DTOs;
+using VideoStreamingShop.Core.Infrastructure.Commands.Storage;
 using VideoStreamingShop.Core.Interfaces;
 using VideoStreamingShop.Core.Usecases.Storage;
 using VideoStreamingShop.Core.Usecases.Videocases;
