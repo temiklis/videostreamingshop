@@ -5,7 +5,7 @@ using VideoStreamingShop.Core.Interfaces.FileExtensions;
 
 namespace VideoStreamingShop.Infrasturcture.Services.FileExtensions
 {
-    public class ImageFileExtension : FileExtension
+    internal class ImageFileExtension : FileExtension
     {
         public ImageFileExtension(IMimeShiffing mimeShiffing, IFileExtensionTranslator translator, List<Extension> supportedExtensions)
             : base(mimeShiffing, translator)

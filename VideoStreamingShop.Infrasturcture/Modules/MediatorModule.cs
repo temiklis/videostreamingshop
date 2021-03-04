@@ -7,7 +7,7 @@ using VideoStreamingShop.Core.Usecases.Videocases;
 
 namespace VideoStreamingShop.Infrasturcture.Modules
 {
-    public class MediatorModule : Autofac.Module
+    internal class MediatorModule : Autofac.Module
     {
         protected override void Load(ContainerBuilder builder)
         {

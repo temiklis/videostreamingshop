@@ -40,7 +40,8 @@ namespace videostreamingshop.API
             services.AddAutoMapper(typeof(Startup));
 
             var connectionString = Configuration.GetConnectionString("Default");
-            services.AddDbContext<VideoShopDbContext>(options => options.UseSqlServer(connectionString,
+            services.AddDbContext<VideoShopDbContext>(options => 
+                options.UseSqlServer(connectionString,
                 b => b.MigrationsAssembly("VideoStreamingShop.API")));
         }
 

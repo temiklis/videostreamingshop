@@ -9,7 +9,7 @@ using VideoStreamingShop.Infrasturcture.Services;
 
 namespace VideoStreamingShop.Infrasturcture.Modules
 {
-    public class StorageModule : Autofac.Module
+    internal class StorageModule : Autofac.Module
     {
         protected override void Load(ContainerBuilder builder)
         {

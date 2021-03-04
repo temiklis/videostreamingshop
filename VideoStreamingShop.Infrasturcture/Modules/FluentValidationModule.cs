@@ -8,7 +8,7 @@ using VideoStreamingShop.Core.Infrastructure.Validations.Video;
 
 namespace VideoStreamingShop.Infrasturcture.Modules
 {
-    public class FluentValidationModule : Autofac.Module
+    internal class FluentValidationModule : Autofac.Module
     {
         protected override void Load(ContainerBuilder builder)
         {
