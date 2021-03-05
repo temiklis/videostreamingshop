@@ -13,35 +13,14 @@ namespace VideoStreamingShop.Web.Pages.Video
 {
     public partial class Create : ComponentBase
     {
-        [Inject]
-        private NavigationManager NavigationManager { get; set; }
-
-        [Inject]
-        private IVideoService videoService { get; set; }
-        [Inject] 
-        private IMapper mapper { get; set; }
-
-        private CreateVideoViewModel createVideoViewModel = new CreateVideoViewModel();
-
-        public string ValidMessage = "Good";
-
         protected override Task OnInitializedAsync()
         {
             return base.OnInitializedAsync();
         }
 
-        private async void HandleValidSubmit()
+        private void HandleBaseVideoInfromationCreated(int videoId)
         {
-            var createVideoDto = mapper.Map<CreateVideoDTO>(createVideoViewModel);
-            var isSuccess = await videoService.CreateVideoWithBaseInformation(createVideoDto);
-            if (isSuccess)
-            {
-                NavigationManager.NavigateTo("");
-            }
-            else
-            {
-                //show module or nothing else
-            }
+
         }
     }
 }
