@@ -51,6 +51,7 @@ namespace VideoStreamingShop.Web
                 client.BaseAddress = new Uri(Configuration["ApiSettings:BaseAddress"]);
             });
 
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddBootstrapCss();
             //services.AddTransient<IVideoService, VideoService>();

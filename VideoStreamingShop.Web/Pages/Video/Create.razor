@@ -3,28 +3,52 @@
 @using VideoStreamingShop.Web.Shared.Components;
 @using VideoStreamingShop.Web.Models;
 
-<h3>Create</h3>
+<div class="base-infromation">
+    <BSContainer>
+        <BSForm Model="@createVideoViewModel" ValidateOnInit="true" OnValidSubmit="@HandleValidSubmit">
 
-<EditForm Model="@createVideoViewModel" OnValidSubmit="@HandleValidSubmit">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-    <div class="form-group">
-        <label></label>
-        <AwesomeInputText id="name" @bind-Value="createVideoViewModel.Name" />
-    </div>
-    <div class="form-group">
-        <AwesomeInputText id="price" @bind-Value="createVideoViewModel.Price" />
-    </div>
-    <div class="form-group">
-        <InputSelect @bind-Value="createVideoViewModel.AgeRate">
-            @foreach (var gender in Enum.GetValues(typeof(AgeRating)))
-            {
-                <option value="@gender">@gender</option>
-            }
-        </InputSelect>
-    </div>
-    <div class="form-group">
-        <InputTextArea id="description" @bind-Value="createVideoViewModel.Description" />
-    </div>
-    <button type="submit" class="btn btn-danger">Create</button>
-</EditForm>
+            <DataAnnotationsValidator/>
+            <h1>Base Information</h1>
+            <BSRow >
+                <BSCol XS="6" Class="mb-3">
+                    <BSLabel For="Name">Name</BSLabel>
+                    <BSInput Id="Name" InputType="InputType.Text" PlaceHolder="Enter Name" @bind-Value="@createVideoViewModel.Name" />
+                    <BSFormFeedback For="@(() => createVideoViewModel.Name)"  ValidMessage="@ValidMessage"></BSFormFeedback>
+                </BSCol>
+                <BSCol XS="6" Class="mb-3">
+                    <BSLabel For="Price">Price</BSLabel>
+                    <BSInput Id="Price" InputType="InputType.Number" PlaceHolder="Enter price" @bind-Value="@createVideoViewModel.Price"/>
+                    <BSFormFeedback For="@(() => createVideoViewModel.Price)"  ValidMessage="@ValidMessage"></BSFormFeedback>
+                </BSCol>
+            </BSRow>
+            <BSRow >
+                <BSCol XS="6" Class="mb-3">
+                    <BSLabel for="AgeRate">Age Rating</BSLabel>
+                    <BSInput Id="AgeRate" InputType="InputType.Select" @bind-Value="@createVideoViewModel.AgeRate">
+                        <option>None</option>
+                        @foreach (var rate in Enum.GetValues(typeof(AgeRating)))
+                        {
+                            <option value="@rate">@rate</option>
+                        }
+                    </BSInput>
+                    <BSFormFeedback For="@(() => createVideoViewModel.AgeRate)"  ValidMessage="@ValidMessage"></BSFormFeedback>
+                </BSCol>
+                <BSCol XS="6" Class="mb-3">
+
+                </BSCol>
+            </BSRow>
+            <BSRow >
+                <BSCol XS="12" Class="mb-3">
+                    <BSLabel for="Description">Description</BSLabel>
+                    <BSInput Id="Description" InputType="InputType.TextArea" Rows="5" @bind-Value="@createVideoViewModel.Description" ></BSInput>
+                    <BSFormFeedback For="@(() => createVideoViewModel.Description)"  ValidMessage="@ValidMessage"></BSFormFeedback>
+                </BSCol>
+            </BSRow>
+            <BSRow >
+                <BSCol XS="12" Class="mb-3">
+                    <BSButton Class="float-right" Color="Color.Danger" ButtonType="ButtonType.Submit">Next</BSButton>
+                </BSCol>
+            </BSRow>
+        </BSForm>
+    </BSContainer>
+</div>

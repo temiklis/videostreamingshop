@@ -4,8 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
+using VideoStreamingShop.Web.Models.DTOs;
 using VideoStreamingShop.Web.ViewModels;
 using VideoStreamingShop.Web.ViewModels.Video;
 
@@ -22,13 +25,15 @@ namespace VideoStreamingShop.Web.Data
             _httpClient = httpClient;
         }
 
-        public async Task<bool> CreateVideoWithBaseInformation(CreateVideoViewModel createVideoViewModel)
+        //TODO CHANGE THIS MODEL TO DTO OBJECT
+        public async Task<bool> CreateVideoWithBaseInformation(CreateVideoDTO createVideoViewModel)
         {
             var uri = API.Video.CreateVideoWithBaseInformation();
 
             var json = JsonConvert.SerializeObject(createVideoViewModel);
-            var content = new StringContent(json);
 
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            
             var response = await _httpClient.PostAsync(uri, content);
 
             return response.IsSuccessStatusCode;

@@ -13,7 +13,7 @@ namespace VideoStreamingShop.API.MapperProfiles
     {
         public VideoMappingProfile()
         {
-            CreateMap<VideoDTO, CreateVideoRequestMessage>();
+            CreateMap<CreateVideoDTO, CreateVideoRequestMessage>();
             CreateMap<Video, VideoDTO>();
         }
     }

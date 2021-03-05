@@ -18,7 +18,6 @@ namespace VideoStreamingShop.Web.Data
 
             public static string GetNotFullyCreatedVideos(string baseUrl, int page, int count)
             {
-#warning change route
                 return $"video/GetNotFullyCreated?page={page}&count={count}";
             }
 
