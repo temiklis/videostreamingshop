@@ -1,0 +1,33 @@
+﻿
+@using VideoStreamingShop.Web.Shared.Components
+
+<div class="upload-images-section">
+
+    <DropZone OnInputFileChange="@OnInputFileChange">
+
+    </DropZone>
+
+    @if (model.Count > 0)
+    {
+        <h4>Images</h4>
+        <div class="row">
+            @foreach (var item in model)
+            {
+                <div class="col-4 w-100 h-100">
+                    <Animation Effect="@Effect.FadeOut" Speed="@Speed.Fast" Delay="@Delay.None" Enabled="@item.IsDeleteStarted" OnAnimationEnd="@(() => RemoveFile(item.Id))">                      
+                        <div>
+                            <a @onclick="@(() => RunDeletionAnimation(item.Id))">
+                                <div class="containerBox">
+                                    <div class="text-box not-display">
+                                        <h5 class="red-box">Remove</h5>
+                                    </div>
+                                    <img class="img-responsive" src="@item.ImageUrl" />
+                                </div>
+                            </a>
+                        </div>
+                    </Animation>
+                </div>
+            }
+        </div>
+    }
+</div>

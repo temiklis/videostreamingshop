@@ -1,0 +1,14 @@
+﻿
+<div class="input-area">
+    <InputFile id="inputDefault"
+               OnChange="@OnFileChange"
+               accept="image/png,image/gif,image/jpeg" />
+</div>
+<div class="drop-area @dropClass">
+    Drag and drop your files here or click open file
+    <InputFile id="inputDrop"
+               OnChange="@OnFileChange"
+               @ondragenter="HandleDragEnter"
+               @ondragleave="HandleDragLeave"
+               multiple />
+</div>
