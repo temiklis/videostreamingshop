@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VideoStreamingShop.Models.Shared;
 using VideoStreamingShop.Web.Models.DTOs;
 using VideoStreamingShop.Web.Models.Video;
 using VideoStreamingShop.Web.ViewModels;
@@ -15,6 +16,7 @@ namespace VideoStreamingShop.Web.Data
         Task<VideoPageViewModel> GetById(int id);
 
         Task<NotFullyCreatedVideoViewModel> GetNotFullyCreatedVideos(int page, int count);
-        Task<bool> CreateVideoWithBaseInformation(CreateVideoDTO createVideoViewModel);
+
+        Task<Result<int>> CreateVideoWithBaseInformation(CreateVideoDTO createVideoViewModel);
     }
 }

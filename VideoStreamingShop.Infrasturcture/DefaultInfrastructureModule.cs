@@ -26,6 +26,7 @@ namespace VideoStreamingShop.Infrasturcture
             if(_isDevelopment)
             {
                 LoadDevelopmentDependencies(builder);
+                builder.RegisterModule(new StorageModule());
             }
             else
             {
@@ -61,10 +62,12 @@ namespace VideoStreamingShop.Infrasturcture
                 .WithParameter(
                     (p, c) => p.ParameterType == typeof(List<Extension>),
                     (p, c) => new List<Extension>()
-                    { 
-                        Extension.JPEG, 
-                        Extension.PNG 
-                    });
+                    {
+                        Extension.JPEG,
+                        Extension.PNG
+                    })
+                .AsImplementedInterfaces()
+                .InstancePerLifetimeScope();
 
             builder.RegisterType<VideoFileExtension>()
                 .Keyed<IFileExtension>(FileType.Video)
@@ -74,7 +77,8 @@ namespace VideoStreamingShop.Infrasturcture
                     {
                         Extension.MP4,
                         Extension.AVI
-                    });
+                    })
+                .InstancePerLifetimeScope();
 
             builder
                 .RegisterType<VideoService>()

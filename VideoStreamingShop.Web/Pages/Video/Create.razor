@@ -1,9 +1,33 @@
 ﻿@page "/video/create";
 
-<CreateBaseVideoInfromation OnVideoCreated="HandleBaseVideoInfromationCreated">
 
-</CreateBaseVideoInfromation>
+<div class="create-section">
+    @if (IsBaseInfromationSectionVisible)
+    {
+        <Animation Effect="@Effect.FadeOutLeft"
+                   Speed="@Speed.Fast"
+                   Delay="@Delay.None"
+                   IterationCount="1"
+                   Enabled="@IsBaseInfromationCreated"
+                   OnAnimationEnd="@HideBaseInfromation">
 
-<UploadImagesForVideo>
+            <CreateBaseVideoInfromation OnVideoCreated="HandleBaseVideoInfromationCreated">
 
-</UploadImagesForVideo>
+
+            </CreateBaseVideoInfromation>
+        </Animation>
+    }
+
+    @if (IsBaseInfromationCreated)
+    {
+        <Animation Effect="@Effect.FadeInRight"
+                   Speed="@Speed.Fast"
+                   Delay="@Delay.None"
+                   IterationCount="1"
+                   Enabled="@IsBaseInfromationCreated">
+            <UploadImagesForVideo VideoId="@createdVideoId">
+
+            </UploadImagesForVideo>
+        </Animation>
+    }
+</div>

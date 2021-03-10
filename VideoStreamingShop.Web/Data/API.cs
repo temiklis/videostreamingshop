@@ -26,5 +26,14 @@ namespace VideoStreamingShop.Web.Data
                 return "video/create";
             }
         }
+
+
+        internal static class Storage
+        {
+            public static string UploadImagesForVideo(int videoId)
+            {
+                return $"video/addImages?videoId={videoId}";
+            }
+        }
     }
 }

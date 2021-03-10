@@ -13,6 +13,11 @@ namespace VideoStreamingShop.Web.Pages.Video
 {
     public partial class Create : ComponentBase
     {
+        private bool IsBaseInfromationCreated = false;
+        private bool IsBaseInfromationSectionVisible = true;
+
+        private int createdVideoId;
+
         protected override Task OnInitializedAsync()
         {
             return base.OnInitializedAsync();
@@ -20,7 +25,13 @@ namespace VideoStreamingShop.Web.Pages.Video
 
         private void HandleBaseVideoInfromationCreated(int videoId)
         {
+            IsBaseInfromationCreated = true;
 
+            createdVideoId = videoId;
+        }
+        private void HideBaseInfromation()
+        {
+            IsBaseInfromationSectionVisible = false;
         }
     }
 }

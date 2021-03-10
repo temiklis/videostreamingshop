@@ -3,31 +3,40 @@
 
 <div class="upload-images-section">
 
-    <DropZone OnInputFileChange="@OnInputFileChange">
+    <h4>Upload Images For Video(Note: First Image which you will upload should be on preview)</h4>
 
-    </DropZone>
+    <div class="mb-3">
+        <DropZone OnInputFileChange="@OnInputFileChange">
+
+        </DropZone>
+    </div>
 
     @if (model.Count > 0)
     {
-        <h4>Images</h4>
-        <div class="row">
+        <BSRow>
             @foreach (var item in model)
             {
-                <div class="col-4 w-100 h-100">
-                    <Animation Effect="@Effect.FadeOut" Speed="@Speed.Fast" Delay="@Delay.None" Enabled="@item.IsDeleteStarted" OnAnimationEnd="@(() => RemoveFile(item.Id))">                      
-                        <div>
-                            <a @onclick="@(() => RunDeletionAnimation(item.Id))">
-                                <div class="containerBox">
-                                    <div class="text-box not-display">
-                                        <h5 class="red-box">Remove</h5>
+                <BSCol SM="4" Class="w-100 h-100 mb-3">
+                        <Animation Effect="@Effect.FadeOut" Speed="@Speed.Fast" Delay="@Delay.None" Enabled="@item.IsDeleteStarted" OnAnimationEnd="@(() => RemoveFile(item.Id))">
+                            <div>
+                                <a @onclick="@(() => RunDeletionAnimation(item.Id))">
+                                    <div class="containerBox">
+                                        <div class="text-box not-display">
+                                            <h5 class="red-box">Remove</h5>
+                                        </div>
+                                        <img class="img-responsive" src="@item.ImageUrl" />
                                     </div>
-                                    <img class="img-responsive" src="@item.ImageUrl" />
-                                </div>
-                            </a>
-                        </div>
-                    </Animation>
-                </div>
+                                </a>
+                            </div>
+                        </Animation>
+                </BSCol>
             }
-        </div>
+        </BSRow>
     }
+
+    <BSRow>
+        <BSCol SM="12" Class="mb-3">
+                <button class="btn btn-danger float-right" @onclick="@OnUploadClicked">Upload</button>
+        </BSCol>
+    </BSRow>
 </div>

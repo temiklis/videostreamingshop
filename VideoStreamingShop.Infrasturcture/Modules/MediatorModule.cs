@@ -3,6 +3,7 @@ using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using VideoStreamingShop.Core.Usecases.Storage;
 using VideoStreamingShop.Core.Usecases.Videocases;
 
 namespace VideoStreamingShop.Infrasturcture.Modules
@@ -17,6 +18,9 @@ namespace VideoStreamingShop.Infrasturcture.Modules
                 .AsImplementedInterfaces();
 
             builder.RegisterAssemblyTypes(typeof(CreateVideoIteractor).Assembly)
+                .AsClosedTypesOf(typeof(IRequestHandler<,>));
+
+            builder.RegisterAssemblyTypes(typeof(UploadImagesForVideoInteractor).Assembly)
                 .AsClosedTypesOf(typeof(IRequestHandler<,>));
         }
     }

@@ -69,7 +69,7 @@ namespace VideoStreamingShop.API.Controllers
         } 
 
         [HttpPost("addImages")]
-        public async Task<ActionResult> UploadImagesForVideo([FromBody] IList<IFormFile> files, int videoId)
+        public async Task<ActionResult> UploadImagesForVideo(IList<IFormFile> files, [FromQuery] int videoId)
         {
             var request = new UploadImagesForVideoRequestMessage()
             {

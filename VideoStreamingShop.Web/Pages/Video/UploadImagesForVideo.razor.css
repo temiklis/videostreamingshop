@@ -62,3 +62,7 @@ img {
     background-color: red;
     width: 100%;
 }
+
+div {
+    margin-bottom:3px;
+}

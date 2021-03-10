@@ -12,6 +12,7 @@ namespace VideoStreamingShop.Web.Pages.Video
         [Parameter]
         public EventCallback<int> OnVideoCreated { get; set; }
 
+#warning remove unnecessary parameters
         [Inject]
         private NavigationManager NavigationManager { get; set; }
         [Inject]
@@ -34,16 +35,11 @@ namespace VideoStreamingShop.Web.Pages.Video
         private async void HandleValidSubmit()
         {
             var createVideoDto = mapper.Map<CreateVideoDTO>(createVideoViewModel);
-            var isSuccess = await videoService.CreateVideoWithBaseInformation(createVideoDto);
-            if (isSuccess)
+            var result = await videoService.CreateVideoWithBaseInformation(createVideoDto);
+            if (result.IsSuccessStatusCode)
             {
-                //need to get from result;
-                int id = 2;
-                await OnVideoCreated.InvokeAsync(id);
-            }
-            else
-            {
-                //show module or nothing else
+                var createdVideoId = result.Content;
+                await OnVideoCreated.InvokeAsync(createdVideoId);
             }
         }
     }

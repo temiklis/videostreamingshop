@@ -2,30 +2,24 @@
 using Microsoft.AspNetCore.Components.Forms;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using VideoStreamingShop.Web.Data;
+using VideoStreamingShop.Web.Models.DTOs;
+using VideoStreamingShop.Web.Models.Shared;
+using VideoStreamingShop.Web.ViewModels.Video;
 
 namespace VideoStreamingShop.Web.Pages.Video
 {
-    // TODO: move that class after testing
-    //TODO rename that shit
-    // reconscturct model later 
-    internal class UploadImagesForVideoViewModel
-    {
-        public Guid Id { get; private set; }
-        public string ImageUrl { get; set; }
-
-        public bool IsDeleteStarted = false;
-
-        public UploadImagesForVideoViewModel(string imageUrl)
-        {
-            Id = Guid.NewGuid();
-            this.ImageUrl = imageUrl;
-        }
-    }
-
     public partial class UploadImagesForVideo : ComponentBase
     {
+        [Parameter]
+        public int VideoId { get; set; }
+
+        [Inject]
+        private IStorageService storageService { get; set; }
+
         //remove thit shit
         private List<UploadImagesForVideoViewModel> model = new List<UploadImagesForVideoViewModel>();
 
@@ -40,7 +34,7 @@ namespace VideoStreamingShop.Web.Pages.Video
             var format = "image/png";
 
             foreach (var imageFile in e.GetMultipleFiles(maxAllowedFiles))
-            { 
+            {
                 var resizedImageFile = await imageFile.RequestImageFileAsync(format, 200, 200);
 
                 var buffer = new byte[resizedImageFile.Size];
@@ -48,7 +42,28 @@ namespace VideoStreamingShop.Web.Pages.Video
 
                 var imageDataUrl = $"data:{format};base64,{Convert.ToBase64String(buffer)}";
 
-                model.Add(new UploadImagesForVideoViewModel(imageDataUrl));
+                var file = new FileData()
+                {
+                    Data = buffer,
+                    FileType = imageFile.ContentType,
+                    Size = imageFile.Size
+                };
+
+                model.Add(new UploadImagesForVideoViewModel(imageDataUrl, file));
+            }
+        }
+
+        private void OnUploadClicked()
+        {
+            if (model.Count > 0)
+            {
+                var uploadImagesDTO = new UploadImagesForVideoDTO()
+                {
+                    Id = VideoId,
+                    Files = model.Select(x => x.File)
+                };
+
+                storageService.UploadImagesForVideo(uploadImagesDTO);
             }
         }
 

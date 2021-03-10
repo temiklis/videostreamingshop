@@ -8,35 +8,50 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
+using VideoStreamingShop.Models.Shared;
 using VideoStreamingShop.Web.Models.DTOs;
 using VideoStreamingShop.Web.ViewModels;
 using VideoStreamingShop.Web.ViewModels.Video;
 
 namespace VideoStreamingShop.Web.Data
 {
+    //TODO NEED TO WRITE WRAPPER FOR Results
     public class VideoService : IVideoService
     {
         //TODO: Need to create class for httpclientFactory;
         private readonly HttpClient _httpClient;
-        //TODO
+        //TODO remove this later
         private readonly string _remoteServiceBaseUrl;
         public VideoService(HttpClient httpClient)
         {
             _httpClient = httpClient;
         }
 
-        //TODO CHANGE THIS MODEL TO DTO OBJECT
-        public async Task<bool> CreateVideoWithBaseInformation(CreateVideoDTO createVideoViewModel)
+        public async Task<Result<int>> CreateVideoWithBaseInformation(CreateVideoDTO createVideoViewModel)
         {
             var uri = API.Video.CreateVideoWithBaseInformation();
 
             var json = JsonConvert.SerializeObject(createVideoViewModel);
 
             var content = new StringContent(json, Encoding.UTF8, "application/json");
-            
+
             var response = await _httpClient.PostAsync(uri, content);
 
-            return response.IsSuccessStatusCode;
+            if (!response.IsSuccessStatusCode)
+            {
+                return new Result<int>()
+                {
+                    IsSuccessStatusCode = false
+                };
+            }
+
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+            var createdVideoId = JsonConvert.DeserializeObject<int>(jsonResponse);
+            return new Result<int>()
+            {
+                IsSuccessStatusCode = true,
+                Content = createdVideoId
+            };
         }
 
         public async Task<IEnumerable<VideoCardViewModel>> Get(int page = 0, int take = 20)

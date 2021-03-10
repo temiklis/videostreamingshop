@@ -22,14 +22,12 @@ namespace VideoStreamingShop.Core.Usecases.Storage
         private readonly IImageStorage _imageStorage;
         private readonly IValidator<UploadImagesForVideoRequestMessage> _validator;
         private readonly IRepository _repository;
-        private readonly IFileExtension _fileExtension;
         public UploadImagesForVideoInteractor(IImageStorage imageStorage, IValidator<UploadImagesForVideoRequestMessage> validator, 
-            IRepository repository, [KeyFilter(FileType.Image)] IFileExtension fileExtension)
+            IRepository repository)
         {
             _imageStorage = imageStorage;
             _validator = validator;
             _repository = repository;
-            _fileExtension = fileExtension;
         }
         public async Task<UploadImagesForVideoResponseMessage> Handle(UploadImagesForVideoRequestMessage request, CancellationToken cancellationToken)
         {

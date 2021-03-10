@@ -21,6 +21,7 @@ namespace VideoStreamingShop.Infrasturcture.Modules
                .WithParameter(
                    (p, c) => p.ParameterType == typeof(string) && p.Name == "storagePath",
                    (p, c) => "AppFolder/Images")
+               .AsImplementedInterfaces()
                .InstancePerLifetimeScope();
 
             builder

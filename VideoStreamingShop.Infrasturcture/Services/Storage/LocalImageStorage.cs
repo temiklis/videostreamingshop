@@ -13,7 +13,7 @@ namespace VideoStreamingShop.Infrasturcture.Services
     {
         private readonly string _storagePath;
         private readonly IFileExtension _fileExtension;
-        public LocalImageStorage(string storagePath, [KeyFilter(FileType.Image)] IFileExtension fileExtension)
+        public LocalImageStorage([KeyFilter(FileType.Image)] IFileExtension fileExtension, string storagePath)
         {
             _storagePath = storagePath;
             _fileExtension = fileExtension;
