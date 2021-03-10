@@ -48,7 +48,7 @@ namespace VideoStreamingShop.Web.Shared.Components
         private async Task OnFileChange(InputFileChangeEventArgs e)
         {
             dropClass = string.Empty;
-            await this.OnInputFileChange.InvokeAsync();   
+            await this.OnInputFileChange.InvokeAsync(e);   
         }
     }
 }
