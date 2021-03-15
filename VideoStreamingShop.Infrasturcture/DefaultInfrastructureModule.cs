@@ -51,13 +51,11 @@ namespace VideoStreamingShop.Infrasturcture
         private void LoadDevelopmentDependencies(ContainerBuilder builder)
         {
 
-            builder
-                .RegisterType<MimeShiffing>()
+            builder.RegisterType<MimeShiffing>()
                 .As<IMimeShiffing>()
                 .InstancePerLifetimeScope();
 
-            builder
-                .RegisterType<ImageFileExtension>()
+            builder.RegisterType<ImageFileExtension>()
                 .Keyed<IFileExtension>(FileType.Image)
                 .WithParameter(
                     (p, c) => p.ParameterType == typeof(List<Extension>),
@@ -80,8 +78,7 @@ namespace VideoStreamingShop.Infrasturcture
                     })
                 .InstancePerLifetimeScope();
 
-            builder
-                .RegisterType<VideoService>()
+            builder.RegisterType<VideoService>()
                 .As<IVideoService>()
                 .InstancePerLifetimeScope();
 
@@ -89,7 +86,7 @@ namespace VideoStreamingShop.Infrasturcture
                 .As<IFileExtensionTranslator>()
                 .WithParameter(
                     (p, c) => p.ParameterType == typeof(string) && p.Name == "pathToTranslationFile",
-                    (p, c) => "AppFolder/Csv/meme1.csv")
+                    (p, c) => "AppFolder/Csv/translator_mimes.csv")
                 .InstancePerLifetimeScope();
         }
     }

@@ -8,7 +8,7 @@ using VideoStreamingShop.Web.ViewModels.Video;
 
 namespace VideoStreamingShop.Web.Pages.Video
 {
-    public partial class Details
+    public partial class Details : ComponentBase
     {
         [Inject]
         private IVideoService videoService { get; set; }

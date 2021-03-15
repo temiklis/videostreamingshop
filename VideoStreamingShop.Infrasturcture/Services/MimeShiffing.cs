@@ -37,7 +37,7 @@ namespace VideoStreamingShop.Infrasturcture.Services
                 var mime = Marshal.PtrToStringUni(mimeTypePointer);
                 return mime ?? DefaultMimeType;
             }
-            catch (AccessViolationException e)
+            catch (AccessViolationException)
             {
                 return DefaultMimeType;
             }

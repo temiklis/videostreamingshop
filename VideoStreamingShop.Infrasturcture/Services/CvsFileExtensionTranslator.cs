@@ -11,6 +11,7 @@ using System.Linq;
 
 namespace VideoStreamingShop.Infrasturcture.Services
 {
+#warning need to think about how to seed data in cvs after start
     //need to move from services folder
     internal class CvsFileExtensionTranslator : IFileExtensionTranslator
     {
