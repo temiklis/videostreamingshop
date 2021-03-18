@@ -61,9 +61,10 @@ namespace VideoStreamingShop.Infrasturcture.Data
            return await query.ToListAsync();
         }
 
-        public Task UpdateAsync<T>(T entity) where T : Entity
+        public async Task UpdateAsync<T>(T entity) where T : Entity
         {
-            throw new NotImplementedException();
+            _shopDbContext.Entry<T>(entity).State = EntityState.Modified;
+            await _shopDbContext.SaveChangesAsync();
         }
     }
 }

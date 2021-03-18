@@ -2,6 +2,7 @@
 using VideoStreamingShop.Application.Commands.Video;
 using VideoStreamingShop.Core.DTOs;
 using VideoStreamingShop.Core.Entities;
+using System.Linq;
 
 namespace VideoStreamingShop.API.MapperProfiles
 {
@@ -10,7 +11,10 @@ namespace VideoStreamingShop.API.MapperProfiles
         public VideoMappingProfile()
         {
             CreateMap<CreateVideoDTO, CreateVideoRequestMessage>();
-            CreateMap<Video, VideoDTO>();
+            CreateMap<Video, VideoDTO>()
+                .ForMember(
+                dest => dest.ImageUri, 
+                opt => opt.MapFrom((video,source) => video.Images.FirstOrDefault()?.Uri)) ;
         }
     }
 }

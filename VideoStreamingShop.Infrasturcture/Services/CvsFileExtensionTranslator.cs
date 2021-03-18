@@ -22,11 +22,19 @@ namespace VideoStreamingShop.Infrasturcture.Services
         }
         public Extension GetFormat(string format)
         {
-            using (var reader = new StreamReader(_pathToTranslationFile))
+            var assembly = this.GetType().Assembly;
+
+            using (var stream = assembly.GetManifestResourceStream(_pathToTranslationFile))
+            using (var reader = new StreamReader(stream))
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
+                csv.Context.RegisterClassMap<SupportedExtensionMap>();
+
                 var records = csv.GetRecords<SupportedExtension>();
-                var item = records.FirstOrDefault(v => v.MimeType.Equals(format));
+                var item = records
+                    .ToList()
+                    .FirstOrDefault(v => v.MimeType.Equals(format));
+
                 if (item != null)
                     return item.Extension;
             }

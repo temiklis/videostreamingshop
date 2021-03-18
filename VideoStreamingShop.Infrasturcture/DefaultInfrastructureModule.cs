@@ -86,7 +86,7 @@ namespace VideoStreamingShop.Infrasturcture
                 .As<IFileExtensionTranslator>()
                 .WithParameter(
                     (p, c) => p.ParameterType == typeof(string) && p.Name == "pathToTranslationFile",
-                    (p, c) => @"..\..\Data\FileTranslator\csv\Formats.xlsx")
+                    (p, c) => @"VideoStreamingShop.Infrasturcture.Data.FileTranslator.csv.Formats.csv")
                 .InstancePerLifetimeScope();
         }
     }

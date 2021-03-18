@@ -5,12 +5,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Data\FileTranslator\csv\Formats.csv" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Data\FileTranslator\csv\Formats.csv" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Ardalis.Specification" Version="4.2.0" />
     <PackageReference Include="Ardalis.Specification.EntityFrameworkCore" Version="4.2.0" />
     <PackageReference Include="Autofac" Version="6.0.0" />
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AutoMapper.Contrib.Autofac.DependencyInjection" Version="5.1.0" />
-    <PackageReference Include="CsvHelper" Version="18.0.0" />
+    <PackageReference Include="CsvHelper" Version="26.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.12">
       <PrivateAssets>all</PrivateAssets>

@@ -8,9 +8,7 @@ namespace VideoStreamingShop.Infrasturcture.Models
 {
     public class SupportedExtension
     {
-        [Name("MIME")]
         public string MimeType { get; set; }
-        [Name("Format")]
         public Extension Extension { get; set; }
     }
 }

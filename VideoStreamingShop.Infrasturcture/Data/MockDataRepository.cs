@@ -9,7 +9,7 @@ using VideoStreamingShop.Core.Interfaces;
 
 namespace VideoStreamingShop.Infrasturcture.Data
 {
-    public class MockDataRepository :  IRepository
+    public class MockDataRepository : IRepository
     {
         private readonly string fileExtension = "txt";
         private readonly string folder = "repositoryFolder";

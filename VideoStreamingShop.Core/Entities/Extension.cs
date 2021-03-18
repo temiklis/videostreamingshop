@@ -2,6 +2,7 @@
 {
     public enum Extension
     {
+        Unknown,
         PNG,
         JPEG,
         AVI,

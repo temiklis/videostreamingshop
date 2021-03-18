@@ -27,7 +27,7 @@ namespace VideoStreamingShop.Application.Usecases.Storage
             _repository = repository;
         }
         public async Task<UploadImagesForVideoResponseMessage> Handle(UploadImagesForVideoRequestMessage request, CancellationToken cancellationToken)
-        {
+         {
             var validationResult = _validator.Validate(request);
             if (!validationResult.IsValid)
                 return new UploadImagesForVideoResponseMessage(validationResult);
@@ -51,7 +51,7 @@ namespace VideoStreamingShop.Application.Usecases.Storage
                 imageUris.Add(uri);
 
                 video.RegisterImage(image);
-                await _repository.AddAsync<Video>(video);
+                await _repository.UpdateAsync<Video>(video);
             }
 
             return new UploadImagesForVideoResponseMessage(validationResult, imageUris);

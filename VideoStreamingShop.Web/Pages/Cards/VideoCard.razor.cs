@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ namespace VideoStreamingShop.Web.Pages.Cards
     public partial class VideoCard : ComponentBase
     {
         [Inject]
+        private IConfiguration configuration { get; set; }
+        [Inject]
         private NavigationManager navigationManager { get; set; }
         //[Inject]
         //private ILogger Logger { get; set; }
@@ -19,8 +22,11 @@ namespace VideoStreamingShop.Web.Pages.Cards
         [Parameter]
         public VideoCardViewModel videoCard { get; set; }
 
+        private string baseAddress;
+
         protected override void OnInitialized()
         {
+            baseAddress = configuration.GetValue<string>("ApiSettings:BaseAddress");
             base.OnInitialized();
             navigationManager.LocationChanged += HandleLocationChanged;
         }

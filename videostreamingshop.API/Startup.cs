@@ -7,7 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using System.IO;
 using System.Reflection;
 using VideoStreamingShop.Infrasturcture;
 using VideoStreamingShop.Infrasturcture.Data;
@@ -50,6 +52,14 @@ namespace videostreamingshop.API
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseStaticFiles();
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "AppFolder/Images")),
+                RequestPath = "/api/AppFolder/Images"
+            });
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
