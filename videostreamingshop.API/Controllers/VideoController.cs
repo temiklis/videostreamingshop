@@ -2,16 +2,13 @@
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
+using VideoStreamingShop.Application.Commands.Storage;
+using VideoStreamingShop.Application.Commands.Video;
 using VideoStreamingShop.Core.DTOs;
-using VideoStreamingShop.Core.Infrastructure.Commands.Storage;
 using VideoStreamingShop.Core.Interfaces;
-using VideoStreamingShop.Core.Usecases.Storage;
-using VideoStreamingShop.Core.Usecases.Videocases;
 
 //need to add specific dto for all actions;
 namespace VideoStreamingShop.API.Controllers

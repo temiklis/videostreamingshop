@@ -4,10 +4,11 @@ using FluentValidation;
 using FluentValidation.Results;
 using Moq;
 using NUnit.Framework;
+using VideoStreamingShop.Application.Commands.Video;
+using VideoStreamingShop.Application.Usecases.Videocases;
+using VideoStreamingShop.Application.Validations.Video;
 using VideoStreamingShop.Core.Entities;
-using VideoStreamingShop.Core.Infrastructure.Validations.Video;
 using VideoStreamingShop.Core.Interfaces;
-using VideoStreamingShop.Core.Usecases.Videocases;
 
 namespace videostreamingshop.Core.Test
 {

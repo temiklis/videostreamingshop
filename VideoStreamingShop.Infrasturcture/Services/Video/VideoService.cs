@@ -1,15 +1,12 @@
-﻿using Ardalis.Specification;
-using AutoMapper;
+﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using VideoStreamingShop.Application.Specifications;
 using VideoStreamingShop.Core.DTOs;
 using VideoStreamingShop.Core.Entities;
 using VideoStreamingShop.Core.Interfaces;
-using VideoStreamingShop.Core.Specifications;
 
 namespace VideoStreamingShop.Infrasturcture.Services
 {

@@ -1,10 +1,7 @@
 ﻿using Autofac;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using VideoStreamingShop.Core.Infrastructure.Validations.Storage;
-using VideoStreamingShop.Core.Infrastructure.Validations.Video;
+using VideoStreamingShop.Application.Validations.Storage;
+using VideoStreamingShop.Application.Validations.Video;
 
 namespace VideoStreamingShop.Infrasturcture.Modules
 {

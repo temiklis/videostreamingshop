@@ -1,19 +1,15 @@
 ﻿using Ardalis.Specification;
-using Moq;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using VideoStreamingShop.Core.DTOs;
 using VideoStreamingShop.Core.Entities;
 using VideoStreamingShop.Core.Interfaces;
 
 namespace VideoStreamingShop.Infrasturcture.Data
 {
-    public class MockDataRepository : IRepository
+    public class MockDataRepository :  IRepository
     {
         private readonly string fileExtension = "txt";
         private readonly string folder = "repositoryFolder";

@@ -1,10 +1,7 @@
 ﻿using Autofac;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using VideoStreamingShop.Core.Usecases.Storage;
-using VideoStreamingShop.Core.Usecases.Videocases;
+using VideoStreamingShop.Application.Usecases.Storage;
+using VideoStreamingShop.Application.Usecases.Videocases;
 
 namespace VideoStreamingShop.Infrasturcture.Modules
 {

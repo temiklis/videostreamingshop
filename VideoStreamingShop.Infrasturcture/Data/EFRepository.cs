@@ -2,11 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using VideoStreamingShop.Core.Entities;
 using VideoStreamingShop.Core.Interfaces;
-using System.Linq;
 using Ardalis.Specification.EntityFrameworkCore;
 
 namespace VideoStreamingShop.Infrasturcture.Data

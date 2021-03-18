@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoStreamingShop.API.TEST
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoStreamingShop.Web", "VideoStreamingShop.Web\VideoStreamingShop.Web.csproj", "{56CACB9A-C7BE-48ED-B487-5EFE5B45674A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoStreamingShop.Application", "VideoStreamingShop.Application\VideoStreamingShop.Application.csproj", "{58BD785F-B65C-4B44-9792-6FA738CF9C4C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{56CACB9A-C7BE-48ED-B487-5EFE5B45674A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56CACB9A-C7BE-48ED-B487-5EFE5B45674A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56CACB9A-C7BE-48ED-B487-5EFE5B45674A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58BD785F-B65C-4B44-9792-6FA738CF9C4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58BD785F-B65C-4B44-9792-6FA738CF9C4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58BD785F-B65C-4B44-9792-6FA738CF9C4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58BD785F-B65C-4B44-9792-6FA738CF9C4C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

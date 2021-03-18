@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\VideoStreamingShop.Core\VideoStreamingShop.Core.csproj" />
+    <ProjectReference Include="..\VideoStreamingShop.Application\VideoStreamingShop.Application.csproj" />
   </ItemGroup>
 
 </Project>
